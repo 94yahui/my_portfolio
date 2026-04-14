@@ -7,7 +7,7 @@ const Contact = () => {
   return (
     <div
       id="contact"
-      className="relative w-full mt-30 bg-linear-to-br from-blue-200 border-dashed border border-blue-500 p-15 rounded-2xl group scroll-mt-30"
+      className="relative w-full mt-30 bg-linear-to-br from-blue-200 border-dashed border border-blue-500 p-20 rounded-2xl group scroll-mt-30"
     >
       <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000" />
       <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000" />

@@ -1,5 +1,5 @@
 import Card from "./components/Card";
-import cartoonPhoto from "./assets/cartoon.png";
+import cartoonPhoto from "./assets/IMG21.png";
 import reactIcon from "./assets/react.svg";
 import firebaseIcon from "./assets/firebase.svg";
 import tsIcon from "./assets/ts.png";
@@ -13,7 +13,7 @@ import penIcon from "./assets/pen.png";
 
 const Intro = () => {
   return (
-    <div className="relative m-auto max-w-270 bg-gray-200 rounded-2xl bg-linear-to-br from-blue-500 to-gray-800 w-full flex items-end">
+    <div className="relative m-auto max-w-270 bg-gray-200 rounded-2xl bg-linear-to-br from-blue-500 to-black w-full flex items-end">
       <div>
         <div className="p-8 text-center">
           <p className="text-gray-100 sm:text-2xl">Hi, I'm</p>
@@ -72,7 +72,7 @@ const Intro = () => {
         <img
           src={reactIcon}
           alt=""
-          className="z-10 hidden sm:block w-20 absolute top-12 right-10"
+          className="z-10 hidden sm:block w-20 absolute top-12 right-10 blur-[2px]"
         />
         <img
           src={firebaseIcon}
@@ -87,17 +87,17 @@ const Intro = () => {
         <img
           src={nodejsIcon}
           alt=""
-          className="z-16 hidden sm:block w-30 absolute top-3 right-70 rotate-10"
+          className="z-16 hidden sm:block w-30 absolute top-3 right-75 rotate-10 blur-[.5px]"
         />
         <img
           src={swiftIcon}
           alt=""
-          className="z-14 hidden sm:block w-15 absolute top-45 right-5 rotate-10"
+          className="z-14 hidden sm:block w-15 absolute top-45 right-5 rotate-10 blur-[1px]"
         />
         <img
           src={tailwindIcon}
           alt=""
-          className="z-15 hidden sm:block w-15 absolute top-35 right-20 -rotate-20"
+          className="z-15 hidden sm:block w-15 absolute top-35 right-20 -rotate-20 blur-[.2px]"
         />
       </div>
     </div>

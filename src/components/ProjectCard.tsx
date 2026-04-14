@@ -19,7 +19,7 @@ const ProjectCard = ({
   tools,
 }: ProjectCardProps) => {
   return (
-    <div className="p-6 rounded-xl bg-linear-to-br to-blue-600 from-gray-800 flex gap-6 h-full">
+    <div className="p-6 rounded-xl bg-linear-to-br to-blue-600 from-black flex gap-6 h-full">
       <img src={iconUrl} className="w-20 h-20" />
       <div>
         <div className="flex items-center justify-between w-full">

@@ -11,7 +11,7 @@ const About = () => {
             alt="me"
             className="rounded-full w-50 h-50 object-cover object-bottom shadow-2xl"
           />
-          <p className="p-10 text-gray-800 leading-relaxed font-normal">
+          <p className="px-10 pt-10 text-gray-800 leading-relaxed font-normal">
             I am a{" "}
             <span className="font-extrabold text-black">
               Full-stack Developer
