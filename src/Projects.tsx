@@ -1,7 +1,7 @@
 import ProjectCard from "./components/ProjectCard";
 import clario from "./assets/clario.svg";
 import skinu from "./assets/skinu.png";
-import guardian from "./assets/Guardian.svg";
+import guardian from "./assets/guardian.svg"
 
 const Projects = () => {
   return (

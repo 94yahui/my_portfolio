@@ -1,5 +1,5 @@
 import Card from "./components/Card";
-import cartoonPhoto from "./assets/Cartoon.png";
+import cartoonPhoto from "./assets/cartoon.png";
 import reactIcon from "./assets/react.svg";
 import firebaseIcon from "./assets/firebase.svg";
 import tsIcon from "./assets/ts.png";
