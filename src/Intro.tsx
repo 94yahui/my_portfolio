@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import cartoonSpring from "./assets/cartoon-spring.png";
 import cartoonSummer from "./assets/cartoon-summer.png";
 import cartoonWinter from "./assets/cartoon-winter.png";
 import cartoonFall from "./assets/cartoon-guy.png";
+import cartoonRain from "./assets/cartoon-rain.png";
 import reactIcon from "./assets/react.svg";
 import firebaseIcon from "./assets/firebase.svg";
 import tsIcon from "./assets/ts.png";
@@ -14,24 +16,59 @@ import phoneIcon from "./assets/smartphone.png";
 import folderIcon from "./assets/folder.png";
 import penIcon from "./assets/pen.png";
 
-const seasonImages = {
-  spring: cartoonSpring,
-  summer: cartoonSummer,
-  fall: cartoonFall,
-  winter: cartoonWinter,
-};
-
-const getSeasonImage = () => {
-  const month = new Date().getMonth() + 1;
-
-  if (month >= 3 && month <= 5) return seasonImages.spring;
-  if (month >= 6 && month <= 8) return seasonImages.summer;
-  if (month >= 9 && month <= 11) return seasonImages.fall;
-  return seasonImages.winter;
-};
 
 const Intro = () => {
-  const currentSeasonImage = getSeasonImage();
+
+  const [weatherImg, setWeatherImg] = useState(cartoonSpring);
+
+  useEffect(() => {
+  const fetchWeather = async () => {
+    // 获取当前月份作为备选逻辑 (0-11, 所以 +1)
+    const currentMonth = new Date().getMonth() + 1;
+    
+    // 定义备选季节函数
+    const getFallbackSeasonImg = () => {
+      if (currentMonth >= 3 && currentMonth <= 5) return cartoonSpring;
+      if (currentMonth >= 6 && currentMonth <= 8) return cartoonSummer;
+      if (currentMonth >= 9 && currentMonth <= 11) return cartoonFall;
+      return cartoonWinter;
+    };
+
+    try {
+      const API_KEY = (import.meta.env as any).VITE_WEATHER_API_KEY;
+      const city = "Vancouver";
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+      );
+
+      // 如果响应不成功（比如 401, 404），直接跳到 catch
+      if (!response.ok) throw new Error("Weather API error");
+
+      const data = await response.json();
+      const temp = data.main.temp;
+      const condition = data.weather[0].main;
+
+      // 正常的 API 逻辑
+      if (condition === "Rain" || condition === "Drizzle" || condition === "Thunderstorm") {
+        setWeatherImg(cartoonRain);
+      } else if (temp <= 5) {
+        setWeatherImg(cartoonWinter);
+      } else if (temp > 5 && temp <= 20) {
+        setWeatherImg(cartoonSpring);
+      } else if (temp > 20 && temp <= 28) {
+        setWeatherImg(cartoonFall);
+      } else {
+        setWeatherImg(cartoonSummer);
+      }
+    } catch (error) {
+      console.error("Using fallback season logic:", error);
+      // --- API 失败，执行退回逻辑 ---
+      setWeatherImg(getFallbackSeasonImg());
+    }
+  };
+
+  fetchWeather();
+}, []);
 
   return (
     <div className="relative m-auto max-w-270 bg-gray-200 rounded-2xl bg-linear-to-br from-blue-500 to-black w-full flex items-end">
@@ -86,7 +123,7 @@ const Intro = () => {
       </div>
       <div className="md:block hidden">
         <img
-          src={seasonImages.summer}
+          src={weatherImg}
           alt=""
           className="relative z-30 w-150 rounded-r-2xl"
         />
