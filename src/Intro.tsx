@@ -1,5 +1,8 @@
 import Card from "./components/Card";
-import cartoonPhoto from "./assets/cartoon-guy.png";
+import cartoonSpring from "./assets/cartoon-spring.png";
+import cartoonSummer from "./assets/cartoon-summer.png";
+import cartoonWinter from "./assets/cartoon-winter.png";
+import cartoonFall from "./assets/cartoon-guy.png";
 import reactIcon from "./assets/react.svg";
 import firebaseIcon from "./assets/firebase.svg";
 import tsIcon from "./assets/ts.png";
@@ -11,7 +14,25 @@ import phoneIcon from "./assets/smartphone.png";
 import folderIcon from "./assets/folder.png";
 import penIcon from "./assets/pen.png";
 
+const seasonImages = {
+  spring: cartoonSpring,
+  summer: cartoonSummer,
+  fall: cartoonFall,
+  winter: cartoonWinter,
+};
+
+const getSeasonImage = () => {
+  const month = new Date().getMonth() + 1;
+
+  if (month >= 3 && month <= 5) return seasonImages.spring;
+  if (month >= 6 && month <= 8) return seasonImages.summer;
+  if (month >= 9 && month <= 11) return seasonImages.fall;
+  return seasonImages.winter;
+};
+
 const Intro = () => {
+  const currentSeasonImage = getSeasonImage();
+
   return (
     <div className="relative m-auto max-w-270 bg-gray-200 rounded-2xl bg-linear-to-br from-blue-500 to-black w-full flex items-end">
       <div>
@@ -65,7 +86,7 @@ const Intro = () => {
       </div>
       <div className="md:block hidden">
         <img
-          src={cartoonPhoto}
+          src={currentSeasonImage}
           alt=""
           className="relative z-30 w-150 rounded-r-2xl"
         />
