@@ -86,7 +86,7 @@ const Intro = () => {
       </div>
       <div className="md:block hidden">
         <img
-          src={currentSeasonImage}
+          src={seasonImages.summer}
           alt=""
           className="relative z-30 w-150 rounded-r-2xl"
         />
