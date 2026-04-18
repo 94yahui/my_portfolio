@@ -20,7 +20,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
   };
 
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex justify-center">
       <div className="fixed top-6 z-100 bg-gray-700/80 backdrop-blur-md rounded-3xl p-2 flex gap-2 justify-around w-fit shadow-2xl border-blue-500/50 border">
         {buttons.map((label, index) => {
           const isActive = activeIndex === index;

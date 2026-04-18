@@ -130,32 +130,32 @@ const Intro = () => {
         <img
           src={reactIcon}
           alt=""
-          className="z-10 hidden sm:block w-20 absolute top-12 right-15 blur-[2px]"
+          className="z-10 hidden sm:block w-20 absolute top-8 right-25 blur-[2px]"
         />
         <img
           src={firebaseIcon}
           alt=""
-          className="z-11 hidden sm:block w-15 absolute -top-10 right-5 rotate-20"
+          className="z-11 hidden sm:block w-15 absolute -top-10 right-5 rotate-30 blur-[2px]"
         />
         <img
           src={tsIcon}
           alt=""
-          className="z-12 hidden sm:block w-20 absolute -top-15 right-40 -rotate-20"
+          className="z-12 hidden sm:block w-20 absolute -top-15 right-50 -rotate-20 blur-[1px]"
         />
         <img
           src={nodejsIcon}
           alt=""
-          className="z-16 hidden sm:block w-35 absolute -top-5 right-70 blur-[.5px]"
+          className="z-16 hidden sm:block w-30 absolute top-55 right-2 rotate-320 blur-[2px]"
         />
         <img
           src={swiftIcon}
           alt=""
-          className="z-14 hidden sm:block w-15 absolute top-45 right-5 rotate-10 blur-[1px]"
+          className="z-14 hidden sm:block w-15 absolute top-30 right-8 rotate-10 blur-[1px]"
         />
         <img
           src={tailwindIcon}
           alt=""
-          className="z-15 hidden sm:block w-15 absolute top-35 right-25 -rotate-20 blur-[.2px]"
+          className="z-15 hidden sm:block w-20 absolute top-45 right-25 -rotate-20 blur-[2px]"
         />
       </div>
     </div>
