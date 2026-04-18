@@ -1,6 +1,13 @@
 import { useState } from "react";
+import sunIcon from "./assets/sun.svg";
+import moonIcon from "./assets/moon.svg";
 
-const Navigator = () => {
+interface NavigatorProps {
+  dark: boolean;
+  toggle: () => void;
+}
+
+const Navigator = ({ dark, toggle }: NavigatorProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   
   const buttons = ["Projects", "Experience", "About", "Contact"];
@@ -14,7 +21,7 @@ const Navigator = () => {
 
   return (
     <div className="flex justify-center mt-6">
-      <div className="fixed top-6 z-[100] bg-gray-700/80 backdrop-blur-md rounded-3xl p-2 flex gap-2 justify-around w-[400px] shadow-2xl border-blue-500/50 border">
+      <div className="fixed top-6 z-100 bg-gray-700/80 backdrop-blur-md rounded-3xl p-2 flex gap-2 justify-around w-fit shadow-2xl border-blue-500/50 border">
         {buttons.map((label, index) => {
           const isActive = activeIndex === index;
           return (
@@ -34,6 +41,13 @@ const Navigator = () => {
             </button>
           );
         })}
+
+        <button
+          onClick={toggle}
+          className="text-sm p-2 px-3 rounded-2xl cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600"
+        >
+          <img src={dark? sunIcon : moonIcon}/>
+        </button>
       </div>
     </div>
   );

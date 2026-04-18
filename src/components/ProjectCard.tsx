@@ -20,10 +20,10 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <div className="p-6 rounded-xl bg-linear-to-br to-blue-600 from-black flex gap-6 h-full">
-      <img src={iconUrl} className="w-20 h-20" />
+      <img src={iconUrl} className="w-20 h-20 drop-shadow-blue-600 drop-shadow-2xl" />
       <div>
         <div className="flex items-center justify-between w-full">
-          <h2 className="font-semibold text-2xl text-white">{title}</h2>
+          <h2 className="font-semibold text-2xl text-blue-100">{title}</h2>
           <div className="flex items-center gap-3">
           <a
             href={demoUrl}
@@ -43,7 +43,7 @@ const ProjectCard = ({
           </a>
           </div>
         </div>
-        <p className="py-3 text-gray-50">{descrp}</p>
+        <p className="py-3 text-blue-200">{descrp}</p>
         <div className="flex flex-wrap gap-2 text-gray-300">
           {tools.map((tool, index) => (
             <div

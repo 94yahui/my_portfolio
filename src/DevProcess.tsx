@@ -4,14 +4,14 @@ import { devProcessColors } from "./style/color";
 
 const DevProcess = () => {
   return (
-    <div className="mt-30">
+    <div className="mt-30 max-w-270 m-auto">
       <div className="text-center">
-        <h1 className="text-3xl">Development Process</h1>
-        <p className="mt-3 text-gray-500">
+        <h1 className="text-3xl dark:text-gray-300">Development Process</h1>
+        <p className="mt-3 text-gray-400">
           A systematic approach to building web and mobile applications
         </p>
       </div>
-      <div className="mt-8 flex flex-col md:flex-row flex-wrap gap-6">
+      <div className="mt-8 flex flex-col md:flex-row flex-wrap gap-6 items-stretch">
         <DevProcessCard
           title="Ideation & Planning"
           steps={[

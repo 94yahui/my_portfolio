@@ -5,8 +5,8 @@ import guardian from "./assets/guardian.svg"
 
 const Projects = () => {
   return (
-    <div className="mt-30 scroll-mt-30" id="projects">
-      <h1 className="text-3xl text-center">Featured Projects</h1>
+    <div className="mt-30 scroll-mt-30 max-w-270 m-auto" id="projects">
+      <h1 className="text-3xl text-center dark:text-gray-300">Featured Projects</h1>
       <div className="flex flex-wrap gap-6 mt-8">
         <div className="w-full sm:w-[calc(50%-12px)]">
           <ProjectCard

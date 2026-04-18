@@ -12,10 +12,10 @@ import openAIIcon from "./assets/openai.svg"
 
 const Techinical = () => {
   return (
-    <div className="mt-30">
+    <div className="mt-30 max-w-270 m-auto">
       <div className="text-center">
-        <h1 className="text-3xl">Technical Expertise</h1>
-        <p className="mt-3 text-gray-500">
+        <h1 className="text-3xl dark:text-gray-300">Technical Expertise</h1>
+        <p className="mt-3 text-gray-400">
           Building full-stack web and mobile applications across the entire development lifecycle
         </p>
       </div>
@@ -25,7 +25,7 @@ const Techinical = () => {
         <div className="flex-1">
           <div className="flex gap-2 items-center mb-4">
             <Box className="w-5.5 h-5.5 text-blue-500" />
-            <h2 className="font-semibold text-2xl">Core Technologies</h2>
+            <h2 className="font-semibold text-2xl dark:text-gray-400">Core Technologies</h2>
           </div>
           <ProgressBar name="React.js" subname="Frontend Framework" length={85} color="blue" />
           <ProgressBar name="TypeScript" subname="Language" length={80} color="blue" />
@@ -37,7 +37,7 @@ const Techinical = () => {
         <div className="flex-1">
           <div className="flex gap-2 items-center mb-4">
             <Layers className="w-5 h-5 text-purple-500" />
-            <h2 className="font-semibold text-2xl">Tools & Platforms</h2>
+            <h2 className="font-semibold text-2xl dark:text-gray-400">Tools & Platforms</h2>
           </div>
           <div className="flex flex-row flex-wrap gap-3">
             <SkillCard name="AI / LLM" iconUrl={openAIIcon}/>

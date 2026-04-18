@@ -71,7 +71,7 @@ const Intro = () => {
 }, []);
 
   return (
-    <div className="relative m-auto max-w-270 bg-gray-200 rounded-2xl bg-linear-to-br from-blue-500 to-black w-full flex items-end">
+    <div className="relative m-auto max-w-270 bg-gray-200 rounded-2xl bg-linear-to-br from-blue-500 to-black w-full flex items-center">
       <div>
         <div className="p-8 text-center">
           <p className="text-gray-100 sm:text-2xl">Hi, I'm</p>
@@ -86,7 +86,7 @@ const Intro = () => {
             <a
               href="/yahui_resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/40 text-white text-sm font-medium hover:bg-white/10 transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-blue-400 text-white text-sm font-medium hover:bg-blue-500/50 transition-colors duration-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +121,7 @@ const Intro = () => {
           <Card iconUrl={penIcon} descrp="UI/UX Mindset" />
         </div>
       </div>
-      <div className="md:block hidden">
+      <div className="md:block hidden self-end">
         <img
           src={weatherImg}
           alt=""

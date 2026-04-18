@@ -27,7 +27,7 @@ const ProgressBar = ({
 
   return (
     <div className="py-2">
-      <p className="font-semibold mb-1">
+      <p className="font-semibold mb-1 dark:text-gray-500">
         {name}
         <span
           className={`pl-1 pr-1 text-[12px] ml-1 font-normal ${progressColors[color]} rounded-2xl`}
@@ -35,9 +35,9 @@ const ProgressBar = ({
           {subname}
         </span>
       </p>
-      <div className="w-full bg-gray-300 rounded-full h-3">
+      <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-3">
         <div
-          className="bg-linear-to-r from-blue-500 to-purple-400 h-3 rounded-full transition-all duration-1000"
+          className="bg-linear-to-r to-blue-500 h-3 rounded-full transition-all duration-1000"
           style={{ width: `${width}%` }}
         ></div>
       </div>

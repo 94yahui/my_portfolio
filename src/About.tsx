@@ -1,9 +1,9 @@
 import myphoto from "./assets/IMG_3592.png";
 const About = () => {
   return (
-    <div id="about" className="mt-30 scroll-mt-30">
+    <div id="about" className="mt-30 scroll-mt-30 max-w-270 m-auto">
       <div className="text-center">
-        <h1 className="text-3xl">About Me</h1>
+        <h1 className="text-3xl dark:text-gray-300">About Me</h1>
 
         <div className="mt-5 flex flex-col items-center ">
           <img
@@ -11,14 +11,14 @@ const About = () => {
             alt="me"
             className="rounded-full w-50 h-50 object-cover object-bottom shadow-2xl"
           />
-          <p className="px-10 pt-10 text-gray-800 leading-relaxed font-normal">
+          <p className="px-10 pt-10 text-gray-800 dark:text-gray-400 leading-relaxed font-normal">
             I am a{" "}
-            <span className="font-extrabold text-black">
+            <span className="font-extrabold text-black dark:text-gray-300">
               Full-stack Developer
             </span>{" "}
             who bridges the gap between sophisticated design and
             high-performance code. Currently completing the{" "}
-            <span className="italic font-bold text-black">
+            <span className="italic font-bold text-black dark:text-gray-300">
               Web and Mobile App Development
             </span>{" "}
             program at{" "}
