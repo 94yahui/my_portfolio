@@ -130,7 +130,7 @@ const Intro = () => {
         <img
           src={reactIcon}
           alt=""
-          className="z-10 hidden sm:block w-20 absolute top-12 right-10 blur-[2px]"
+          className="z-10 hidden sm:block w-20 absolute top-12 right-15 blur-[2px]"
         />
         <img
           src={firebaseIcon}
@@ -145,7 +145,7 @@ const Intro = () => {
         <img
           src={nodejsIcon}
           alt=""
-          className="z-16 hidden sm:block w-30 absolute top-3 right-75 rotate-10 blur-[.5px]"
+          className="z-16 hidden sm:block w-35 absolute -top-5 right-70 blur-[.5px]"
         />
         <img
           src={swiftIcon}
@@ -155,7 +155,7 @@ const Intro = () => {
         <img
           src={tailwindIcon}
           alt=""
-          className="z-15 hidden sm:block w-15 absolute top-35 right-20 -rotate-20 blur-[.2px]"
+          className="z-15 hidden sm:block w-15 absolute top-35 right-25 -rotate-20 blur-[.2px]"
         />
       </div>
     </div>
