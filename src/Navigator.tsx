@@ -161,7 +161,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
 
           <button
             onClick={toggle}
-            className="relative z-10 text-sm p-2 px-3 rounded-2xl cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600"
+            className="relative z-10 text-sm p-2 px-3 rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600"
           >
             <img src={dark ? sunIcon : moonIcon} />
           </button>
