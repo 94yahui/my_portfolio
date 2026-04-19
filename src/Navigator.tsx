@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from "react";
 import sunIcon from "./assets/sun.svg";
 import moonIcon from "./assets/moon.svg";
 
@@ -17,7 +17,6 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [pill, setPill] = useState<PillState>({ left: 0, width: 0, scaleY: 1 });
 
-  const navRef = useRef<HTMLDivElement>(null);
   const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const animIdRef = useRef<number | null>(null);
   const fromRectRef = useRef<{ left: number; width: number } | null>(null);
@@ -31,11 +30,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
   };
 
   const getRect = useCallback((btn: HTMLButtonElement) => {
-    const bar = navRef.current;
-    if (!bar) return { left: 0, width: 0 };
-    const barRect = bar.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    return { left: btnRect.left - barRect.left, width: btnRect.width };
+    return { left: btn.offsetLeft, width: btn.offsetWidth };
   }, []);
 
   const easeInOut = (t: number) =>
@@ -101,8 +96,8 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
     [getRect]
   );
 
-  // 初始化 pill 位置
-  useEffect(() => {
+  // offsetLeft 不依赖 fixed 容器的屏幕位置，初始化即准确
+  useLayoutEffect(() => {
     const btn = btnRefs.current[0];
     if (!btn) return;
     const r = getRect(btn);
@@ -115,7 +110,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
 
-  // resize 只注册一次
+  // resize 重新对齐当前激活项
   useEffect(() => {
     const handleResize = () => {
       const btn = btnRefs.current[activeIndexRef.current];
@@ -131,7 +126,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
   return (
     <div className="flex justify-center">
       <div className="fixed top-6 z-100 bg-gray-700/80 backdrop-blur-md rounded-full p-2 shadow-2xl border-blue-500/50 border">
-        <div ref={navRef} className="relative flex gap-2 items-center">
+        <div className="relative flex gap-2 items-center">
 
           <div
             className="absolute top-0 bottom-0 rounded-full pointer-events-none z-0 bg-blue-500 shadow-lg"
