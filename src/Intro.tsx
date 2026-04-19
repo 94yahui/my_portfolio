@@ -55,9 +55,9 @@ const Intro = () => {
           setWeatherImg(cartoonRain);
         } else if (temp <= 5) {
           setWeatherImg(cartoonWinter);
-        } else if (temp > 5 && temp <= 20) {
+        } else if (temp > 5 && temp <= 15) {
           setWeatherImg(cartoonSpring);
-        } else if (temp > 20 && temp <= 28) {
+        } else if (temp > 15 && temp <= 20) {
           setWeatherImg(cartoonFall);
         } else {
           setWeatherImg(cartoonSummer);
