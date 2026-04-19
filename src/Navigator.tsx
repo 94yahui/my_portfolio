@@ -143,7 +143,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
               key={label}
               ref={(el) => { btnRefs.current[index] = el; }}
               onClick={() => {
-                if (index === activeIndex) return;
+                // if (index === activeIndex) return;
                 const btn = btnRefs.current[index];
                 if (btn) animateTo(btn);
                 setActiveIndex(index);
