@@ -6,6 +6,7 @@ import cartoonWinter from "./assets/cartoon-winter.png";
 import cartoonFall from "./assets/cartoon-guy.png";
 import cartoonFall1 from "./assets/cartoon-fall1.png";
 import cartoonRain from "./assets/cartoon-rain.png";
+import cartoonSnow from "./assets/cartoon-snow.png";
 import reactIcon from "./assets/react.svg";
 import firebaseIcon from "./assets/firebase.svg";
 import tsIcon from "./assets/ts.png";
@@ -54,6 +55,8 @@ const Intro = () => {
           condition === "Thunderstorm"
         ) {
           setWeatherImg(cartoonRain);
+        } else if (condition === "Snow") {
+          setWeatherImg(cartoonSnow);
         } else if (temp <= 5) {
           setWeatherImg(cartoonWinter);
         } else if (temp > 5 && temp <= 10) {
