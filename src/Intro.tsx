@@ -4,6 +4,7 @@ import cartoonSpring from "./assets/cartoon-spring.png";
 import cartoonSummer from "./assets/cartoon-summer.png";
 import cartoonWinter from "./assets/cartoon-winter.png";
 import cartoonFall from "./assets/cartoon-guy.png";
+import cartoonFall1 from "./assets/cartoon-fall1.png";
 import cartoonRain from "./assets/cartoon-rain.png";
 import reactIcon from "./assets/react.svg";
 import firebaseIcon from "./assets/firebase.svg";
@@ -55,7 +56,9 @@ const Intro = () => {
           setWeatherImg(cartoonRain);
         } else if (temp <= 5) {
           setWeatherImg(cartoonWinter);
-        } else if (temp > 5 && temp <= 15) {
+        } else if (temp > 5 && temp <= 10) {
+          setWeatherImg(cartoonFall1);
+        } else if (temp > 10 && temp <= 15) {
           setWeatherImg(cartoonFall);
         } else if (temp > 15 && temp <= 20) {
           setWeatherImg(cartoonSpring);
