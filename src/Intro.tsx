@@ -124,7 +124,7 @@ const Intro = () => {
 
           <div className="mt-4 mb-2">
             <a
-              href="/yahui_resume.pdf"
+              href={lang === 'en'? "/yahui_resume.pdf" : "/yahui_resume_zh.pdf"}
               download
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-blue-400 text-white text-sm font-medium hover:bg-blue-500/50 transition-colors duration-200"
             >
