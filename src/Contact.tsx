@@ -2,8 +2,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Mail, Send } from "lucide-react";
+import { useLang } from "./context/LangContext";
+
+const t = {
+  en: {
+    title: "Let's Build Something Great Together",
+    subtitle:
+      "Whether it's a polished mobile app or a full-featured web application, I bring ideas to life with clean code and great user experience. Let's collaborate and build something you're proud of.",
+  },
+  zh: {
+    title: "一起打造出色的产品吧",
+    subtitle:
+      "无论是精致的移动应用还是功能完善的 Web 平台，我都能用简洁的代码和优质的用户体验将创意变为现实。期待与你合作，共同构建令人骄傲的产品。",
+  },
+};
 
 const Contact = () => {
+  const lang = useLang();
+  const text = t[lang];
+
   return (
     <div
       id="contact"
@@ -11,16 +28,14 @@ const Contact = () => {
     >
       <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000" />
       <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000" />
+
       <div className="text-center">
-        <h1 className="text-3xl dark:text-gray-100">
-          Let's Build Something Great Together
-        </h1>
+        <h1 className="text-3xl dark:text-gray-100">{text.title}</h1>
         <p className="mt-5 max-w-150 m-auto text-gray-700 dark:text-gray-400">
-          Whether it's a polished mobile app or a full-featured web application,
-          I bring ideas to life with clean code and great user experience. Let's
-          collaborate and build something you're proud of.
+          {text.subtitle}
         </p>
       </div>
+
       <div className="mt-15 flex gap-4 justify-center">
         <a
           href="https://www.linkedin.com/in/yahui-xu"
@@ -33,6 +48,7 @@ const Contact = () => {
             className="text-4xl text-blue-600 dark:text-blue-400 hover:scale-110 transition cursor-pointer"
           />
         </a>
+
         <a
           href="https://github.com/94yahui"
           target="_blank"

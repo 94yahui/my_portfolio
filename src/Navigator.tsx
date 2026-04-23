@@ -1,10 +1,18 @@
-import { useState, useRef, useEffect, useLayoutEffect, useCallback } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import sunIcon from "./assets/sun.svg";
 import moonIcon from "./assets/moon.svg";
 
 interface NavigatorProps {
   dark: boolean;
   toggle: () => void;
+  lang: "en" | "zh"; // 新增
+  toggleLang: () => void; // 新增
 }
 
 interface PillState {
@@ -13,7 +21,7 @@ interface PillState {
   scaleY: number;
 }
 
-const Navigator = ({ dark, toggle }: NavigatorProps) => {
+const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [pill, setPill] = useState<PillState>({ left: 0, width: 0, scaleY: 1 });
 
@@ -22,7 +30,12 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
   const fromRectRef = useRef<{ left: number; width: number } | null>(null);
   const activeIndexRef = useRef(0);
 
-  const buttons = ["Projects", "Experience", "About", "Contact"];
+  const buttons = {
+    en: ["Projects", "Experience", "About", "Contact"],
+    zh: ["项目", "经历", "关于", "联系"],
+  };
+
+  const labels = buttons[lang];
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id.toLowerCase());
@@ -33,12 +46,12 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
     return { left: btn.offsetLeft, width: btn.offsetWidth };
   }, []);
 
-  const easeInOut = (t: number) =>
-    t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
   const easeOutElastic = (t: number) => {
     if (t === 0 || t === 1) return t;
-    const p = 0.65, s = p / 4;
+    const p = 0.65,
+      s = p / 4;
     return Math.pow(2, -8 * t) * Math.sin(((t - s) * (2 * Math.PI)) / p) + 1;
   };
 
@@ -51,7 +64,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
       fromRectRef.current = from;
 
       const dist = Math.abs(
-        to.left + to.width / 2 - (from.left + from.width / 2)
+        to.left + to.width / 2 - (from.left + from.width / 2),
       );
       const stretchX = Math.min(1 + dist / 160, 1.6);
       const squishY = Math.max(0.6, 1 - dist / 300);
@@ -68,17 +81,33 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
         if (t < 0.42) {
           const p = t / 0.42;
           const ep = easeInOut(p);
-          const midX = lerp(from.left + from.width / 2, to.left + to.width / 2, ep);
-          const w = lerp(from.width, from.width * stretchX, Math.sin(p * Math.PI));
+          const midX = lerp(
+            from.left + from.width / 2,
+            to.left + to.width / 2,
+            ep,
+          );
+          const w = lerp(
+            from.width,
+            from.width * stretchX,
+            Math.sin(p * Math.PI),
+          );
           const sy = lerp(1, squishY, Math.sin(p * Math.PI));
-          left = midX - w / 2; width = w; scaleY = sy;
+          left = midX - w / 2;
+          width = w;
+          scaleY = sy;
         } else {
           const p = (t - 0.42) / 0.58;
           const ep = easeOutElastic(p);
           const midX = to.left + to.width / 2;
           const w = lerp(from.width * stretchX * 0.55, to.width, ep);
-          const sy = lerp(squishY * 1.1, 1, easeOutElastic(Math.min(p * 0.85, 1)));
-          left = midX - w / 2; width = w; scaleY = sy;
+          const sy = lerp(
+            squishY * 1.1,
+            1,
+            easeOutElastic(Math.min(p * 0.85, 1)),
+          );
+          left = midX - w / 2;
+          width = w;
+          scaleY = sy;
         }
 
         setPill({ left, width, scaleY });
@@ -93,7 +122,7 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
 
       animIdRef.current = requestAnimationFrame(frame);
     },
-    [getRect]
+    [getRect],
   );
 
   // offsetLeft 不依赖 fixed 容器的屏幕位置，初始化即准确
@@ -112,22 +141,50 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
 
   // resize 重新对齐当前激活项
   useEffect(() => {
+    let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
     const handleResize = () => {
-      const btn = btnRefs.current[activeIndexRef.current];
+      // 取消上一次还没执行的对齐
+      if (debounceTimer) clearTimeout(debounceTimer);
+
+      // 快速 resize 时先隐藏 pill，防止错位残影
+      setPill((prev) => ({ ...prev, width: 0 }));
+
+      // resize 停止 150ms 后再重新对齐
+      debounceTimer = setTimeout(() => {
+        const btn = btnRefs.current[activeIndexRef.current];
+        if (!btn) return;
+        const r = getRect(btn);
+        setPill({ left: r.left, width: r.width, scaleY: 1 });
+        fromRectRef.current = r;
+      }, 150);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (debounceTimer) clearTimeout(debounceTimer);
+    };
+  }, [getRect]);
+
+  useEffect(() => {
+    // 等 DOM 更新完（按钮文字变化后宽度才是新的）
+    const id = requestAnimationFrame(() => {
+      const btn = btnRefs.current[activeIndex];
       if (!btn) return;
       const r = getRect(btn);
       setPill({ left: r.left, width: r.width, scaleY: 1 });
       fromRectRef.current = r;
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [getRect]);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [lang, getRect]); // 依赖 lang
 
   return (
-    <div className="flex justify-center">
-      <div className="fixed top-6 z-100 bg-gray-700/80 backdrop-blur-md rounded-full p-2 shadow-2xl border-blue-500/50 border">
-        <div className="relative flex gap-2 items-center">
-
+    <div className="flex justify-center w-full px-4">
+      {" "}
+      {/* 增加容器保护，防止直接撞边 */}
+      <div className="fixed top-6 z-100 bg-gray-700/80 backdrop-blur-md rounded-full p-1.5 md:p-2 shadow-2xl border-blue-500/50 border max-w-[95vw]">
+        <div className="relative flex gap-0.5 md:gap-2 items-center">
           <div
             className="absolute top-0 bottom-0 rounded-full pointer-events-none z-0 bg-blue-500 shadow-lg"
             style={{
@@ -138,20 +195,21 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
             }}
           />
 
-          {buttons.map((label, index) => (
+          {labels.map((label, index) => (
             <button
-              key={label}
-              ref={(el) => { btnRefs.current[index] = el; }}
+              key={buttons.en[index]}
+              ref={(el) => {
+                btnRefs.current[index] = el;
+              }}
               onClick={() => {
-                // if (index === activeIndex) return;
                 const btn = btnRefs.current[index];
                 if (btn) animateTo(btn);
                 setActiveIndex(index);
-                scrollTo(label);
+                scrollTo(buttons.en[index]);
               }}
-              className={`relative z-10 text-sm p-2 px-4 rounded-2xl cursor-pointer transition-all duration-300 ${
+              className={`relative z-10 text-[12px] md:text-sm py-2 px-2.5 md:px-4 rounded-2xl cursor-pointer transition-all duration-300 shrink-0 ${
                 activeIndex === index
-                  ? "text-white scale-110"
+                  ? "text-white scale-105 md:scale-110"
                   : "text-gray-300 hover:text-white"
               }`}
             >
@@ -159,13 +217,28 @@ const Navigator = ({ dark, toggle }: NavigatorProps) => {
             </button>
           ))}
 
-          <button
-            onClick={toggle}
-            className="relative z-10 text-sm p-2 px-3 rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600"
-          >
-            <img src={dark ? sunIcon : moonIcon} />
-          </button>
+          {/* 分割线：增加视觉秩序感，并占用极小空间 */}
+          <div className="w-px h-4 dark:bg-gray-500/50 bg-gray-400/50 mx-1 shrink-0" />
 
+          <div className="flex items-center">
+            <button
+              onClick={toggle}
+              className="relative z-10 p-2 rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600 shrink-0"
+            >
+              <img
+                src={dark ? sunIcon : moonIcon}
+                className="w-4 h-4 md:w-5 md:h-5 min-w-4" // 强制最小尺寸，防止被挤小
+                alt="theme"
+              />
+            </button>
+
+            <button
+              onClick={toggleLang}
+              className="relative z-10 text-[12px] md:text-[14px] w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600 font-bold shrink-0"
+            >
+              {lang === "en" ? "中" : "EN"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
