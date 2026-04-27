@@ -6,7 +6,7 @@ const t = {
     title: "Experience",
     subtitle: "Real-world projects and professional contributions",
     sectionTitle: "Work Experience",
-    date: "Jan 2026 – Apr 2026",
+    date: "Jan 2026 – Present",
     jobTitle: "Web Developer & Maintainer",
     company: "Langara College — Fine Arts Department",
     summary:
@@ -23,7 +23,7 @@ const t = {
     title: "工作经历",
     subtitle: "真实项目经验与专业贡献",
     sectionTitle: "工作经历",
-    date: "2026年1月 – 2026年4月",
+    date: "2026年1月 – 现在",
     jobTitle: "Web 开发与维护",
     company: "兰加拉学院 — 美术系",
     summary:
