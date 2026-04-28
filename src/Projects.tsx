@@ -3,6 +3,7 @@ import { useLang } from "./context/LangContext";
 import clario from "./assets/clario.svg";
 import skinu from "./assets/skinu.png";
 import guardian from "./assets/guardian.svg";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
   en: {
@@ -52,7 +53,14 @@ const projects = [
     demoUrl: "https://guardian-mu-three.vercel.app/",
     gitUrl: "",
     iconUrl: guardian,
-    tools: ["SwiftUI", "CoreML", "Spring Boot", "PostgreSQL", "Docker", "AWS EC2"],
+    tools: [
+      "SwiftUI",
+      "CoreML",
+      "Spring Boot",
+      "PostgreSQL",
+      "Docker",
+      "AWS EC2",
+    ],
   },
   {
     demoUrl: "https://www.c-lario.com/",
@@ -71,9 +79,17 @@ const projects = [
 const Projects = () => {
   const lang = useLang();
   const text = t[lang];
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <div className="mt-30 scroll-mt-30 max-w-270 m-auto" id="projects">
+    <div
+      ref={ref}
+      className={`mt-30 scroll-mt-30 max-w-270 m-auto transition-all duration-700 ease-out
+        ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+        }`}
+      id="projects"
+    >
       <h1 className="text-3xl text-center dark:text-gray-300">{text.title}</h1>
       <div className="flex flex-wrap gap-6 mt-8">
         {projects.map((project, i) => (

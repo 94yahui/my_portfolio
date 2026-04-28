@@ -1,5 +1,6 @@
 import { Briefcase, ExternalLink } from "lucide-react";
 import { useLang } from "./context/LangContext";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
   en: {
@@ -48,21 +49,34 @@ const renderBullet = (text: string) => {
       </span>
     ) : (
       <span key={i}>{part}</span>
-    )
+    ),
   );
 };
 
 const techs = [
-  "Next.js", "WordPress", "AWS EC2", "AWS Route 53",
-  "Netlify", "PM2", "Google Analytics",
+  "Next.js",
+  "WordPress",
+  "AWS EC2",
+  "AWS Route 53",
+  "Netlify",
+  "PM2",
+  "Google Analytics",
 ];
 
 const Experience = () => {
   const lang = useLang();
   const text = t[lang];
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <div id="experience" className="mt-30 scroll-mt-30 max-w-270 m-auto">
+    <div
+      id="experience"
+      ref={ref}
+      className={`mt-30 scroll-mt-30 max-w-270 m-auto transition-all duration-700 ease-out
+        ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+        }`}
+    >
       <div className="text-center">
         <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>

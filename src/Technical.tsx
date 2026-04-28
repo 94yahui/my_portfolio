@@ -10,6 +10,7 @@ import tailWindIcon from "./assets/tailwindcss.svg";
 import jwtIcon from "./assets/jwt.svg";
 import linuxIcon from "./assets/linux.svg";
 import openAIIcon from "./assets/openai.svg";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
   en: {
@@ -82,9 +83,13 @@ const toolIcons = [
 const Techinical = () => {
   const lang = useLang();
   const text = t[lang];
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <div className="mt-30 max-w-270 m-auto">
+    <div ref={ref} className={`mt-30 max-w-270 m-auto transition-all duration-700 ease-out
+        ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+        }`}>
       <div className="text-center">
         <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>

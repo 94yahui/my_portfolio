@@ -3,6 +3,7 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Mail, Send } from "lucide-react";
 import { useLang } from "./context/LangContext";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
   en: {
@@ -20,14 +21,19 @@ const t = {
 const Contact = () => {
   const lang = useLang();
   const text = t[lang];
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   return (
     <div
       id="contact"
-      className="max-w-270 m-auto relative w-full mt-30 bg-linear-to-br from-blue-200 dark:from-blue-950 border-dashed border border-blue-500 dark:border-blue-700 p-20 rounded-2xl group scroll-mt-30"
+      ref={ref}
+      className={`max-w-270 m-auto relative w-full mt-30 bg-linear-to-br from-blue-200 dark:from-blue-950 border-dashed border border-blue-500 dark:border-blue-700 p-20 rounded-2xl group scroll-mt-30 transition-all duration-700 ease-out
+        ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+        }`}
     >
-      <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000" />
-      <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000" />
+      <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000 dark:text-blue-400"/>
+      <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000 dark:text-blue-400"/>
 
       <div className="text-center">
         <h1 className="text-3xl dark:text-gray-100">{text.title}</h1>

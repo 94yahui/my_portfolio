@@ -2,6 +2,7 @@ import DevProcessCard from "./components/DevProcess";
 import { useLang } from "./context/LangContext";
 import { Lightbulb, CodeXml, CircleCheck } from "lucide-react";
 import { devProcessColors } from "./style/color";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
   en: {
@@ -40,11 +41,7 @@ const t = {
     cards: [
       {
         title: "创意与规划",
-        steps: [
-          "需求收集与市场调研",
-          "用户流程与线框图设计",
-          "交互原型开发",
-        ],
+        steps: ["需求收集与市场调研", "用户流程与线框图设计", "交互原型开发"],
       },
       {
         title: "开发阶段",
@@ -89,9 +86,16 @@ const cardIcons = [
 const DevProcess = () => {
   const lang = useLang();
   const text = t[lang];
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <div className="mt-30 max-w-270 m-auto">
+    <div
+      ref={ref}
+      className={`mt-30 max-w-270 m-auto transition-all duration-700 ease-out
+        ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+        }`}
+    >
       <div className="text-center">
         <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
