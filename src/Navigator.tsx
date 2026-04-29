@@ -11,8 +11,8 @@ import moonIcon from "./assets/moon.svg";
 interface NavigatorProps {
   dark: boolean;
   toggle: () => void;
-  lang: "en" | "zh"; // 新增
-  toggleLang: () => void; // 新增
+  lang: "en" | "zh";
+  toggleLang: () => void;
 }
 
 interface PillState {
@@ -29,6 +29,9 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
   const animIdRef = useRef<number | null>(null);
   const fromRectRef = useRef<{ left: number; width: number } | null>(null);
   const activeIndexRef = useRef(0);
+  // 标记是否正在程序化滚动（点击导航触发的滚动），期间忽略 scroll spy
+  const isScrollingByClickRef = useRef(false);
+  const clickScrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const buttons = {
     en: ["Projects", "Experience", "About", "Contact"],
@@ -125,7 +128,17 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
     [getRect],
   );
 
-  // offsetLeft 不依赖 fixed 容器的屏幕位置，初始化即准确
+  // 切换激活项（统一入口：scroll spy 和点击都走这里）
+  const setActive = useCallback(
+    (index: number) => {
+      if (index === activeIndexRef.current) return;
+      const btn = btnRefs.current[index];
+      if (btn) animateTo(btn);
+      setActiveIndex(index);
+    },
+    [animateTo],
+  );
+
   useLayoutEffect(() => {
     const btn = btnRefs.current[0];
     if (!btn) return;
@@ -134,44 +147,91 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
     fromRectRef.current = r;
   }, [getRect]);
 
-  // 同步 activeIndex 到 ref
   useEffect(() => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
 
+  // 🌟 Scroll Spy：监听各个 section 进入视口
+  useEffect(() => {
+    const sectionIds = buttons.en.map((name) => name.toLowerCase());
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    // 记录每个 section 的可见比例
+    const visibilityMap = new Map<string, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // 点击导航触发的滚动期间，不要让 scroll spy 干扰
+        if (isScrollingByClickRef.current) return;
+
+        entries.forEach((entry) => {
+          visibilityMap.set(entry.target.id, entry.intersectionRatio);
+        });
+
+        // 找出当前可见比例最高的 section
+        let maxRatio = 0;
+        let mostVisibleId: string | null = null;
+        visibilityMap.forEach((ratio, id) => {
+          if (ratio > maxRatio) {
+            maxRatio = ratio;
+            mostVisibleId = id;
+          }
+        });
+
+        if (mostVisibleId !== null && maxRatio > 0) {
+          const idx = sectionIds.indexOf(mostVisibleId);
+          if (idx !== -1) setActive(idx);
+        }
+      },
+      {
+        // 多个阈值 → 能精确比较哪个更"可见"
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+        // 顶部留出导航高度，让切换时机更自然
+        rootMargin: "-80px 0px -40% 0px",
+      },
+    );
+
+    sections.forEach((sec) => observer.observe(sec));
+
+    return () => observer.disconnect();
+    // 只依赖 setActive；section 列表是稳定的（页面结构不变）
+  }, [setActive]);
+
   // resize 重新对齐当前激活项
   useEffect(() => {
-  let debounceTimer: ReturnType<typeof setTimeout> | null = null
-  let lastWidth = window.innerWidth // 记录上次宽度
+    let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+    let lastWidth = window.innerWidth;
 
-  const handleResize = () => {
-    const currentWidth = window.innerWidth
+    const handleResize = () => {
+      const currentWidth = window.innerWidth;
+      if (currentWidth === lastWidth) return;
+      lastWidth = currentWidth;
 
-    // 只有宽度变了才处理，高度变化（手机地址栏）直接忽略
-    if (currentWidth === lastWidth) return
-    lastWidth = currentWidth
+      if (debounceTimer) clearTimeout(debounceTimer);
+      setPill((prev) => ({ ...prev, width: 0 }));
 
-    if (debounceTimer) clearTimeout(debounceTimer)
-    setPill((prev) => ({ ...prev, width: 0 }))
+      debounceTimer = setTimeout(() => {
+        const btn = btnRefs.current[activeIndexRef.current];
+        if (!btn) return;
+        const r = getRect(btn);
+        setPill({ left: r.left, width: r.width, scaleY: 1 });
+        fromRectRef.current = r;
+      }, 150);
+    };
 
-    debounceTimer = setTimeout(() => {
-      const btn = btnRefs.current[activeIndexRef.current]
-      if (!btn) return
-      const r = getRect(btn)
-      setPill({ left: r.left, width: r.width, scaleY: 1 })
-      fromRectRef.current = r
-    }, 150)
-  }
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (debounceTimer) clearTimeout(debounceTimer);
+    };
+  }, [getRect]);
 
-  window.addEventListener('resize', handleResize)
-  return () => {
-    window.removeEventListener('resize', handleResize)
-    if (debounceTimer) clearTimeout(debounceTimer)
-  }
-}, [getRect])
-
+  // 语言切换后重新对齐
   useEffect(() => {
-    // 等 DOM 更新完（按钮文字变化后宽度才是新的）
     const id = requestAnimationFrame(() => {
       const btn = btnRefs.current[activeIndex];
       if (!btn) return;
@@ -180,12 +240,10 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
       fromRectRef.current = r;
     });
     return () => cancelAnimationFrame(id);
-  }, [lang, getRect]); // 依赖 lang
+  }, [lang, getRect]);
 
   return (
     <div className="flex justify-center w-full px-4">
-      {" "}
-      {/* 增加容器保护，防止直接撞边 */}
       <div className="fixed top-6 z-100 bg-gray-700/80 backdrop-blur-md rounded-full p-1.5 md:p-2 shadow-2xl border-blue-500/50 border max-w-[95vw]">
         <div className="relative flex gap-0.5 md:gap-2 items-center">
           <div
@@ -205,9 +263,15 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
                 btnRefs.current[index] = el;
               }}
               onClick={() => {
-                const btn = btnRefs.current[index];
-                if (btn) animateTo(btn);
-                setActiveIndex(index);
+                // 点击时锁定 scroll spy，等滚动结束再解锁
+                isScrollingByClickRef.current = true;
+                if (clickScrollTimerRef.current)
+                  clearTimeout(clickScrollTimerRef.current);
+                clickScrollTimerRef.current = setTimeout(() => {
+                  isScrollingByClickRef.current = false;
+                }, 800); // 略大于 smooth scroll 的时间
+
+                setActive(index);
                 scrollTo(buttons.en[index]);
               }}
               className={`relative z-10 text-[12px] md:text-sm py-2 px-2.5 md:px-4 rounded-2xl cursor-pointer transition-all duration-300 shrink-0 ${
@@ -220,7 +284,6 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
             </button>
           ))}
 
-          {/* 分割线：增加视觉秩序感，并占用极小空间 */}
           <div className="w-px h-4 dark:bg-gray-500/50 bg-gray-400/50 mx-1 shrink-0" />
 
           <div className="flex items-center">
@@ -230,7 +293,7 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
             >
               <img
                 src={dark ? sunIcon : moonIcon}
-                className="w-4 h-4 md:w-5 md:h-5 min-w-4" // 强制最小尺寸，防止被挤小
+                className="w-4 h-4 md:w-5 md:h-5 min-w-4"
                 alt="theme"
               />
             </button>
