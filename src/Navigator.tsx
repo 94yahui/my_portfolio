@@ -141,31 +141,34 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
 
   // resize 重新对齐当前激活项
   useEffect(() => {
-    let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null
+  let lastWidth = window.innerWidth // 记录上次宽度
 
-    const handleResize = () => {
-      // 取消上一次还没执行的对齐
-      if (debounceTimer) clearTimeout(debounceTimer);
+  const handleResize = () => {
+    const currentWidth = window.innerWidth
 
-      // 快速 resize 时先隐藏 pill，防止错位残影
-      setPill((prev) => ({ ...prev, width: 0 }));
+    // 只有宽度变了才处理，高度变化（手机地址栏）直接忽略
+    if (currentWidth === lastWidth) return
+    lastWidth = currentWidth
 
-      // resize 停止 150ms 后再重新对齐
-      debounceTimer = setTimeout(() => {
-        const btn = btnRefs.current[activeIndexRef.current];
-        if (!btn) return;
-        const r = getRect(btn);
-        setPill({ left: r.left, width: r.width, scaleY: 1 });
-        fromRectRef.current = r;
-      }, 150);
-    };
+    if (debounceTimer) clearTimeout(debounceTimer)
+    setPill((prev) => ({ ...prev, width: 0 }))
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (debounceTimer) clearTimeout(debounceTimer);
-    };
-  }, [getRect]);
+    debounceTimer = setTimeout(() => {
+      const btn = btnRefs.current[activeIndexRef.current]
+      if (!btn) return
+      const r = getRect(btn)
+      setPill({ left: r.left, width: r.width, scaleY: 1 })
+      fromRectRef.current = r
+    }, 150)
+  }
+
+  window.addEventListener('resize', handleResize)
+  return () => {
+    window.removeEventListener('resize', handleResize)
+    if (debounceTimer) clearTimeout(debounceTimer)
+  }
+}, [getRect])
 
   useEffect(() => {
     // 等 DOM 更新完（按钮文字变化后宽度才是新的）
