@@ -21,7 +21,7 @@ const DevProcessCard = ({title, steps, color,children}:DevProcessProps)=>{
         {steps.map((step,index)=>
         <div className="flex gap-4 flex-row items-start">
             <div className={`min-w-6 h-6 rounded-2xl flex justify-center items-center ${devProcessColors[color]}`}>{index + 1}</div>
-            <p className="-m-0.75 text-[15px] dark:text-gray-400">{step}</p>
+            <p className="-m-0.75 text-[15px] dark:text-gray-400 group-hover:dark:text-gray-300 transition-all duration-500">{step}</p>
         </div>
         )}
         </div>
