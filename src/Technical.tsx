@@ -19,11 +19,11 @@ const t = {
     coreTitle: "Core Technologies",
     toolsTitle: "Tools & Platforms",
     skills: [
+      { name: "Next.js", subname: "Full-stack Framework" },
       { name: "React.js", subname: "Frontend Framework" },
       { name: "TypeScript", subname: "Language" },
       { name: "Node.js", subname: "Backend Runtime" },
       { name: "Swift", subname: "iOS Development" },
-      { name: "JavaScript", subname: "Language" },
     ],
     tools: [
       "AI / LLM",
@@ -42,11 +42,11 @@ const t = {
     coreTitle: "核心技术",
     toolsTitle: "工具与平台",
     skills: [
+      { name: "Next.js", subname: "全栈框架" },
       { name: "React.js", subname: "前端框架" },
       { name: "TypeScript", subname: "编程语言" },
       { name: "Node.js", subname: "后端运行" },
       { name: "Swift", subname: "iOS 开发" },
-      { name: "JavaScript", subname: "编程语言" },
     ],
     tools: [
       "AI / 大模型",

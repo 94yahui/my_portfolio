@@ -27,10 +27,10 @@ const t = {
     description: (
       <>
         Crafting exceptional web and mobile experiences with{" "}
+        <span className="text-green-500 text-xl">Next.js</span>,{" "}
         <span className="text-purple-400 text-xl">React</span>,{" "}
-        <span className="text-white text-xl">Swift</span>,{" "}
         <span className="text-red-400 text-xl">TypeScript</span> and{" "}
-        <span className="text-green-500 text-xl">Node.js</span>
+        <span className="text-yellow-400 text-xl">Swift</span>{" "}
       </>
     ),
     cards: ["AI Driven Dev", "Cross Platform", "10+ Projects", "UI/UX Mindset"],
@@ -43,10 +43,10 @@ const t = {
     description: (
       <>
         专注于使用{" "}
+        <span className="text-green-500 text-xl">Next.js</span>、{" "}
         <span className="text-purple-400 text-xl">React</span>、{" "}
-        <span className="text-white text-xl">Swift</span>、{" "}
         <span className="text-red-400 text-xl">TypeScript</span> 和{" "}
-        <span className="text-green-500 text-xl">Node.js</span>{" "}
+        <span className="text-yellow-400 text-xl">Swift</span>{" "}
         构建优质的 Web 与移动端体验
       </>
     ),
