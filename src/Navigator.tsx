@@ -191,7 +191,7 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
         // 多个阈值 → 能精确比较哪个更"可见"
         threshold: [0, 0.25, 0.5, 0.75, 1],
         // 顶部留出导航高度，让切换时机更自然
-        rootMargin: "-80px 0px -20% 0px",
+        rootMargin: "-80px 0px -35% 0px",
       },
     );
 
