@@ -75,7 +75,7 @@ const About = () => {
           {/* 渐变圆容器 */}
           <div className="relative w-50 h-50 flex items-end justify-center">
             {/* 渐变背景圆 */}
-            <div className="absolute inset-0 rounded-full shadow-2xl bg-linear-to-tr from-gray-200 to-[#f8885f]" />
+            <div className="absolute inset-0 rounded-full shadow-2xl bg-linear-to-t from-gray-00 to-gray-200" />
             {/* 矢量图，底部超出圆 */}
             <img
               src={myphoto}
