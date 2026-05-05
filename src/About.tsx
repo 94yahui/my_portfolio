@@ -1,4 +1,4 @@
-import myphoto from "./assets/myPhoto.png";
+import myphoto from "./assets/IMG_42374.png";
 import { useLang } from "./context/LangContext";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 
@@ -72,11 +72,17 @@ const About = () => {
       <div className="text-center">
         <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
         <div className="mt-5 flex flex-col items-center">
-          <img
-            src={myphoto}
-            alt="me"
-            className="rounded-full w-50 h-50 object-cover object-bottom shadow-2xl"
-          />
+          {/* 渐变圆容器 */}
+          <div className="relative w-50 h-50 flex items-end justify-center">
+            {/* 渐变背景圆 */}
+            <div className="absolute inset-0 rounded-full shadow-2xl bg-linear-to-tr from-gray-200 to-[#f8885f]" />
+            {/* 矢量图，底部超出圆 */}
+            <img
+              src={myphoto}
+              alt="me"
+              className="relative w-50 h-auto object-contain -mb-6 z-10 transform -translate-y-6"
+            />
+          </div>
           <p className="px-10 pt-10 text-gray-800 dark:text-gray-400 leading-relaxed font-normal">
             {text.paragraph}
           </p>
