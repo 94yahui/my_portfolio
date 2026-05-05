@@ -1,4 +1,4 @@
-import myphoto from "./assets/IMG_42374.png";
+import myphoto from "./assets/IMG4577.png";
 import { useLang } from "./context/LangContext";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 
