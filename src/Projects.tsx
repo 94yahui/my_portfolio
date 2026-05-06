@@ -10,14 +10,14 @@ const t = {
     title: "Featured Projects",
     projects: [
       {
-        title: "Guardian",
-        descrp:
-          "An AI-driven navigation assistant designed for the visually impaired to provide real-time scene description, LiDAR-based object tracking, and integrated emergency support.",
-      },
-      {
         title: "Clario",
         descrp:
           "An all-in-one platform designed for freelancers to streamline project management, track finances, and handle contracts.",
+      },
+      {
+        title: "Guardian",
+        descrp:
+          "An AI-driven navigation assistant designed for the visually impaired to provide real-time scene description, LiDAR-based object tracking, and integrated emergency support.",
       },
       {
         title: "SkinU",
@@ -30,14 +30,14 @@ const t = {
     title: "精选项目",
     projects: [
       {
-        title: "Guardian",
-        descrp:
-          "一款专为视障人士设计的 AI 导航助手，提供实时场景描述、基于 LiDAR 的物体追踪以及紧急求助支持。",
-      },
-      {
         title: "Clario",
         descrp:
           "一个面向自由职业者的一站式平台，整合了项目管理、财务追踪与合同处理功能。",
+      },
+      {
+        title: "Guardian",
+        descrp:
+          "一款专为视障人士设计的 AI 导航助手，提供实时场景描述、基于 LiDAR 的物体追踪以及紧急求助支持。",
       },
       {
         title: "SkinU",
@@ -49,6 +49,13 @@ const t = {
 };
 
 const projects = [
+
+  {
+    demoUrl: "https://www.c-lario.com/",
+    gitUrl: "https://github.com/94yahui/clario",
+    iconUrl: clario,
+    tools: ["Node JS", "TypeScript", "Tailwind", "Firebase", "MangoDB"],
+  },
   {
     demoUrl: "https://guardian-mu-three.vercel.app/",
     gitUrl: "",
@@ -61,12 +68,6 @@ const projects = [
       "Docker",
       "AWS EC2",
     ],
-  },
-  {
-    demoUrl: "https://www.c-lario.com/",
-    gitUrl: "https://github.com/94yahui/clario",
-    iconUrl: clario,
-    tools: ["Node JS", "TypeScript", "Tailwind", "Firebase", "MangoDB"],
   },
   {
     demoUrl: "https://skinu-danielvelasteguis-projects.vercel.app/signup",
