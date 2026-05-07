@@ -12,7 +12,7 @@ const t = {
       {
         title: "Clario",
         descrp:
-          "An all-in-one platform designed for freelancers to streamline project management, track finances, and handle contracts.",
+          "An intelligent ecosystem for freelancers providing automated contract auditing, AI-assisted data ingestion from uploads, and streamlined financial tracking for independent business management.",
       },
       {
         title: "Guardian",
@@ -32,7 +32,7 @@ const t = {
       {
         title: "Clario",
         descrp:
-          "一个面向自由职业者的一站式平台，整合了项目管理、财务追踪与合同处理功能。",
+          "专为自由职业者打造的智能生态系统，提供自动化合同审计、AI 数据解析导入及流线型财务管理功能。",
       },
       {
         title: "Guardian",
@@ -54,7 +54,7 @@ const projects = [
     demoUrl: "https://www.c-lario.com/",
     gitUrl: "https://github.com/94yahui/clario",
     iconUrl: clario,
-    tools: ["Node JS", "TypeScript", "Tailwind", "Firebase", "MangoDB"],
+    tools: ["Node JS", "TypeScript", "Tailwind", "Firebase", "MangoDB", "Redux", "Axios", "Vercel",],
   },
   {
     demoUrl: "https://guardian-mu-three.vercel.app/",
@@ -67,13 +67,15 @@ const projects = [
       "PostgreSQL",
       "Docker",
       "AWS EC2",
+      "Java",
+      "JWT"
     ],
   },
   {
     demoUrl: "https://skinu-danielvelasteguis-projects.vercel.app/signup",
     gitUrl: "https://github.com/94yahui/SkinU-Project",
     iconUrl: skinu,
-    tools: ["JavaScript", "HTML/CSS", "Firebase"],
+    tools: ["JavaScript", "HTML/CSS", "Firebase", "Vercel"],
   },
 ];
 
