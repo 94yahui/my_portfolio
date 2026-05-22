@@ -18,6 +18,7 @@ import openAIIcon from "./assets/openai_dark.svg";
 import phoneIcon from "./assets/smartphone.png";
 import folderIcon from "./assets/folder.png";
 import penIcon from "./assets/pen.png";
+import ContactIcon from "./components/ContactIcons";
 
 const t = {
   en: {
@@ -35,7 +36,7 @@ const t = {
       </>
     ),
     cards: ["AI Driven Dev", "Cross Platform", "10+ Projects", "UI/UX Mindset"],
-    weatherCity: "Vancouver, BC"
+    weatherCity: "Vancouver, BC",
   },
   zh: {
     hi: "你好，我是",
@@ -44,16 +45,15 @@ const t = {
     download: "下载简历",
     description: (
       <>
-        专注于使用{" "}
-        <span className="text-green-500 text-xl">Next.js</span>、{" "}
+        专注于使用 <span className="text-green-500 text-xl">Next.js</span>、{" "}
         <span className="text-purple-400 text-xl">React</span>、{" "}
         <span className="text-red-400 text-xl">TypeScript</span> 和{" "}
-        <span className="text-yellow-400 text-xl">Swift</span>{" "}
-        构建优质的 Web 与移动端体验
+        <span className="text-yellow-400 text-xl">Swift</span> 构建优质的 Web
+        与移动端体验
       </>
     ),
     cards: ["AI 驱动开发", "跨平台应用", "10+ 项目", "UI/UX 思维"],
-    weatherCity: "温哥华, BC"
+    weatherCity: "温哥华, BC",
   },
 };
 
@@ -79,7 +79,7 @@ const Intro = () => {
         const API_KEY = (import.meta.env as any).VITE_WEATHER_API_KEY;
         const city = "Vancouver";
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`,
         );
 
         if (!response.ok) throw new Error("Weather API error");
@@ -126,7 +126,9 @@ const Intro = () => {
 
           <div className="mt-4 mb-2">
             <a
-              href={lang === 'en'? "/yahui_resume.pdf" : "/yahui_resume_zh.pdf"}
+              href={
+                lang === "en" ? "/yahui_resume.pdf" : "/yahui_resume_zh.pdf"
+              }
               download
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-blue-400 text-white text-sm font-medium hover:bg-blue-500/50 transition-colors duration-200"
             >
@@ -146,6 +148,9 @@ const Intro = () => {
               </svg>
               {text.download}
             </a>
+            <div className="mt-5">
+              <ContactIcon disableDarkMode={true}/>
+            </div>
           </div>
 
           <p className="p-2 text-gray-200">{text.description}</p>
@@ -159,7 +164,11 @@ const Intro = () => {
       </div>
 
       <div className="md:block hidden self-end">
-        <img src={weatherImg} alt="" className="relative z-30 w-150 rounded-r-2xl" />
+        <img
+          src={weatherImg}
+          alt=""
+          className="relative z-30 w-150 rounded-r-2xl"
+        />
         <div className="absolute bottom-4 right-4 z-40 flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium text-white bg-black/40 backdrop-blur-sm border border-white/20">
           <div className="relative -left-1 flex items-center justify-center w-4 h-4">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-60 [animation-duration:2.5s]" />
@@ -168,12 +177,36 @@ const Intro = () => {
           </div>
           {text.weatherCity}
         </div>
-        <img src={reactIcon} alt="" className="z-10 hidden sm:block w-20 absolute top-8 right-25 blur-[2px]" />
-        <img src={firebaseIcon} alt="" className="z-11 hidden sm:block w-15 absolute -top-10 right-5 rotate-30 blur-[2px]" />
-        <img src={tsIcon} alt="" className="z-12 hidden sm:block w-20 absolute -top-15 right-50 -rotate-20 blur-[1px]" />
-        <img src={nodejsIcon} alt="" className="z-16 hidden sm:block w-30 absolute top-55 right-2 rotate-320 blur-[2px]" />
-        <img src={swiftIcon} alt="" className="z-14 hidden sm:block w-15 absolute top-30 right-8 rotate-10 blur-[1px]" />
-        <img src={tailwindIcon} alt="" className="z-15 hidden sm:block w-20 absolute top-45 right-25 -rotate-20 blur-[2px]" />
+        <img
+          src={reactIcon}
+          alt=""
+          className="z-10 hidden sm:block w-20 absolute top-8 right-25 blur-[2px]"
+        />
+        <img
+          src={firebaseIcon}
+          alt=""
+          className="z-11 hidden sm:block w-15 absolute -top-10 right-5 rotate-30 blur-[2px]"
+        />
+        <img
+          src={tsIcon}
+          alt=""
+          className="z-12 hidden sm:block w-20 absolute -top-15 right-50 -rotate-20 blur-[1px]"
+        />
+        <img
+          src={nodejsIcon}
+          alt=""
+          className="z-16 hidden sm:block w-30 absolute top-55 right-2 rotate-320 blur-[2px]"
+        />
+        <img
+          src={swiftIcon}
+          alt=""
+          className="z-14 hidden sm:block w-15 absolute top-30 right-8 rotate-10 blur-[1px]"
+        />
+        <img
+          src={tailwindIcon}
+          alt=""
+          className="z-15 hidden sm:block w-20 absolute top-45 right-25 -rotate-20 blur-[2px]"
+        />
       </div>
     </div>
   );

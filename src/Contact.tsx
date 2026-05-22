@@ -1,9 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Mail, Send } from "lucide-react";
 import { useLang } from "./context/LangContext";
 import { useScrollReveal } from "./hooks/useScrollReveal";
+import ContactIcon from "./components/ContactIcons";
 
 const t = {
   en: {
@@ -32,8 +30,8 @@ const Contact = () => {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
         }`}
     >
-      <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000 dark:text-blue-400"/>
-      <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000 dark:text-blue-400"/>
+      <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000 dark:text-blue-400" />
+      <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000 dark:text-blue-400" />
 
       <div className="text-center">
         <h1 className="text-3xl dark:text-gray-100">{text.title}</h1>
@@ -41,37 +39,8 @@ const Contact = () => {
           {text.subtitle}
         </p>
       </div>
-
-      <div className="mt-15 flex gap-4 justify-center">
-        <a
-          href="https://www.linkedin.com/in/yahui-xu"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block"
-        >
-          <FontAwesomeIcon
-            icon={faLinkedin}
-            className="text-4xl text-blue-600 dark:text-blue-400 hover:scale-110 transition cursor-pointer"
-          />
-        </a>
-
-        <a
-          href="https://github.com/94yahui"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block"
-        >
-          <FontAwesomeIcon
-            icon={faGithub}
-            className="text-4xl text-gray-700 dark:text-gray-300 hover:scale-110 transition cursor-pointer"
-          />
-        </a>
-        <a href="mailto:xuyahui12@gmail.com" className="inline-block">
-          <FontAwesomeIcon
-            icon={faEnvelope}
-            className="text-4xl text-gray-600 dark:text-gray-300 hover:scale-110 transition cursor-pointer"
-          />
-        </a>
+      <div className="mt-15">
+        <ContactIcon />
       </div>
     </div>
   );
