@@ -22,6 +22,7 @@ import penIcon from "./assets/pen.png";
 const t = {
   en: {
     hi: "Hi, I'm",
+    name: "Yahui Xu",
     title: "Full stack developer",
     download: "Download Resume",
     description: (
@@ -38,6 +39,7 @@ const t = {
   },
   zh: {
     hi: "你好，我是",
+    name: "许亚辉",
     title: "全栈开发者",
     download: "下载简历",
     description: (
@@ -116,7 +118,7 @@ const Intro = () => {
         <div className="p-8 text-center">
           <p className="text-gray-100 sm:text-2xl">{text.hi}</p>
           <h1 className="p-2 sm:text-8xl text-5xl font-semibold text-white">
-            Yahui Xu
+            {text.name}
           </h1>
           <h2 className="p-2 sm:text-4xl text-2xl font-semibold text-gray-100">
             {text.title}
