@@ -124,7 +124,7 @@ const Intro = () => {
             {text.title}
           </h2>
 
-          <div className="mt-4 mb-2">
+          <div className="mt-4">
             <a
               href={
                 lang === "en" ? "/yahui_resume.pdf" : "/yahui_resume_zh.pdf"
