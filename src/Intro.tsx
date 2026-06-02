@@ -25,7 +25,7 @@ const t = {
     hi: "Hi, I'm",
     name: "Yahui Xu",
     title: "Full stack developer",
-    download: "Download Resume",
+    download: "View Resume",
     description: (
       <>
         Crafting exceptional web and mobile experiences with{" "}
@@ -42,7 +42,7 @@ const t = {
     hi: "你好，我是",
     name: "许亚辉",
     title: "全栈开发者",
-    download: "下载简历",
+    download: "查看简历",
     description: (
       <>
         专注于使用 <span className="text-green-500 text-xl">Next.js</span>、{" "}
@@ -124,12 +124,15 @@ const Intro = () => {
             {text.title}
           </h2>
 
+          <p className="p-2 text-gray-200">{text.description}</p>
+
           <div className="mt-4">
             <a
               href={
                 lang === "en" ? "/yahui_resume.pdf" : "/yahui_resume_zh.pdf"
               }
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-blue-400 text-white text-sm font-medium hover:bg-blue-500/50 transition-colors duration-200"
             >
               <svg
@@ -142,9 +145,9 @@ const Intro = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
               {text.download}
             </a>
@@ -153,7 +156,6 @@ const Intro = () => {
             </div>
           </div>
 
-          <p className="p-2 text-gray-200">{text.description}</p>
         </div>
 
         <div className="p-8 flex gap-3 justify-center flex-wrap sm:flex-nowrap">
