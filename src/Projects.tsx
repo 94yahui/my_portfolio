@@ -12,7 +12,7 @@ const t = {
     projects: [
       {
         title: "JianliQuanKai",
-        descrp: "A live, AI-powered resume builder for the Chinese market. Features 135+ templates, DeepSeek-driven content optimization, WeChat auth, subscription billing, and one-click PDF export.",
+        descrp: "A live, AI-powered resume builder for the Chinese market. Features 150+ templates, DeepSeek-driven content optimization, WeChat auth, subscription billing, and one-click PDF export.",
       },
       {
         title: "Clario",
@@ -33,7 +33,7 @@ const t = {
     projects: [
       {
         title: "简力全开",
-        descrp: "已上线运营的 AI 简历 SaaS 工具。集成 135+ 套模版、DeepSeek 内容优化、微信登录、订阅付费及一键 PDF 导出功能。",
+        descrp: "已上线运营的 AI 简历 SaaS 工具。集成 150+ 套模版、DeepSeek 内容优化、微信登录、订阅付费及一键 PDF 导出功能。",
       },
       {
         title: "Clario",
