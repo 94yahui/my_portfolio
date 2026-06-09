@@ -9,7 +9,9 @@ import reactIcon from "./assets/react.svg";
 import tailWindIcon from "./assets/tailwindcss.svg";
 import jwtIcon from "./assets/jwt.svg";
 import linuxIcon from "./assets/linux.svg";
-import openAIIcon from "./assets/openai.svg";
+import claudeIcon from "./assets/claude.svg";
+import dockerIcon from "./assets/docker.svg";
+import kubernetesIcon from "./assets/kubernetes.svg";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
@@ -26,6 +28,8 @@ const t = {
       { name: "Swift", subname: "iOS Development" },
     ],
     tools: [
+      "Docker",
+      "Kubernetes",
       "AI / LLM",
       "MongoDB",
       "Firebase",
@@ -49,6 +53,8 @@ const t = {
       { name: "Swift", subname: "iOS 开发" },
     ],
     tools: [
+      "Docker",
+      "Kubernetes",
       "AI / 大模型",
       "MongoDB",
       "Firebase",
@@ -70,7 +76,9 @@ const skillBars = [
 ] as const;
 
 const toolIcons = [
-  openAIIcon,
+  dockerIcon,
+  kubernetesIcon,
+  claudeIcon,
   mongoIcon,
   fireBaseIcon,
   awsIcon,

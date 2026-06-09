@@ -14,7 +14,7 @@ import tsIcon from "./assets/ts.png";
 import nodejsIcon from "./assets/nodejs.svg";
 import swiftIcon from "./assets/swift.png";
 import tailwindIcon from "./assets/tailwindcss.svg";
-import openAIIcon from "./assets/openai_dark.svg";
+import claudeIcon from "./assets/claude.svg";
 import phoneIcon from "./assets/smartphone.png";
 import folderIcon from "./assets/folder.png";
 import penIcon from "./assets/pen.png";
@@ -57,7 +57,7 @@ const t = {
   },
 };
 
-const cardIcons = [openAIIcon, phoneIcon, folderIcon, penIcon];
+const cardIcons = [claudeIcon, phoneIcon, folderIcon, penIcon];
 
 const Intro = () => {
   const lang = useLang();
@@ -160,7 +160,7 @@ const Intro = () => {
 
         <div className="p-8 flex gap-3 justify-center flex-wrap sm:flex-nowrap">
           {cardIcons.map((icon, i) => (
-            <Card key={i} iconUrl={icon} descrp={text.cards[i]} />
+            <Card key={i} iconUrl={icon} descrp={text.cards[i]} iconClassName={i === 0 ? "brightness-0 invert" : ""} />
           ))}
         </div>
       </div>
