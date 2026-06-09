@@ -53,7 +53,7 @@ const t = {
       </>
     ),
     cards: ["AI 驱动开发", "跨平台应用", "10+ 项目", "UI/UX 思维"],
-    weatherCity: "温哥华, BC",
+    weatherCity: "温哥华, 不列颠哥伦比亚省",
   },
 };
 
@@ -129,7 +129,7 @@ const Intro = () => {
           <div className="mt-4">
             <a
               href={
-                lang === "en" ? "/yahui_resume.pdf" : "/yahui_resume_zh.pdf"
+                lang === "en" ? "/yahui_resume.pdf" : "/许亚辉简历.pdf"
               }
               target="_blank"
               rel="noopener noreferrer"
