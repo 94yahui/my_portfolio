@@ -19,5 +19,12 @@ const bgDevProcessColors = {
   orange: "bg-linear-to-br from-orange-500 to-yellow-500",
 }
 
+const glowDevProcessColors = {
+  blue: "group-hover:shadow-[0_0_35px_8px_rgba(59,130,246,0.45)] group-focus:shadow-[0_0_35px_8px_rgba(59,130,246,0.45)] group-active:shadow-[0_0_35px_8px_rgba(59,130,246,0.45)]",
+  purple: "group-hover:shadow-[0_0_35px_8px_rgba(168,85,247,0.45)] group-focus:shadow-[0_0_35px_8px_rgba(168,85,247,0.45)] group-active:shadow-[0_0_35px_8px_rgba(168,85,247,0.45)]",
+  green: "group-hover:shadow-[0_0_35px_8px_rgba(34,197,94,0.45)] group-focus:shadow-[0_0_35px_8px_rgba(34,197,94,0.45)] group-active:shadow-[0_0_35px_8px_rgba(34,197,94,0.45)]",
+  orange: "group-hover:shadow-[0_0_35px_8px_rgba(249,115,22,0.45)] group-focus:shadow-[0_0_35px_8px_rgba(249,115,22,0.45)] group-active:shadow-[0_0_35px_8px_rgba(249,115,22,0.45)]",
+}
 
-export {progressColors, devProcessColors, bgDevProcessColors};
+
+export {progressColors, devProcessColors, bgDevProcessColors, glowDevProcessColors};
