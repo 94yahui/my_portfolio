@@ -25,7 +25,7 @@ const Contact = () => {
     <div
       id="contact"
       ref={ref}
-      className={`max-w-270 m-auto relative w-full mt-30 bg-linear-to-br from-blue-200 dark:from-blue-950 border-dashed border border-blue-500 dark:border-blue-700 p-20 rounded-2xl group scroll-mt-30 transition-all duration-700 ease-out
+      className={`max-w-270 m-auto relative w-full mt-30 bg-linear-to-br from-blue-100 to-blue-50 dark:from-blue-950 dark:to-gray-900 border-dashed border border-blue-500 dark:border-blue-700 p-20 rounded-2xl group scroll-mt-30 transition-all duration-700 ease-out
         ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
         }`}
