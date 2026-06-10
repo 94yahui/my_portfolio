@@ -1,4 +1,3 @@
-import ProgressBar from "./components/ProgressBar";
 import SkillCard from "./components/SkillCard";
 import { useLang } from "./context/LangContext";
 import { Layers, Box } from "lucide-react";
@@ -12,6 +11,10 @@ import linuxIcon from "./assets/linux.svg";
 import claudeIcon from "./assets/claude.svg";
 import dockerIcon from "./assets/docker.svg";
 import kubernetesIcon from "./assets/kubernetes.svg";
+import nextjsIcon from "./assets/nextjs.svg";
+import tsIcon from "./assets/ts.png";
+import nodejsIcon from "./assets/nodejs.svg";
+import swiftIcon from "./assets/swift.png";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
@@ -67,13 +70,7 @@ const t = {
   },
 };
 
-const skillBars = [
-  { length: 85, color: "blue" },
-  { length: 80, color: "blue" },
-  { length: 78, color: "green" },
-  { length: 72, color: "orange" },
-  { length: 85, color: "purple" },
-] as const;
+const coreIcons = [nextjsIcon, reactIcon, tsIcon, nodejsIcon, swiftIcon];
 
 const toolIcons = [
   dockerIcon,
@@ -110,15 +107,11 @@ const Techinical = () => {
             <Box className="w-5.5 h-5.5 text-blue-500" />
             <h2 className="font-semibold text-2xl dark:text-gray-400">{text.coreTitle}</h2>
           </div>
-          {text.skills.map((skill, i) => (
-            <ProgressBar
-              key={i}
-              name={skill.name}
-              subname={skill.subname}
-              length={skillBars[i].length}
-              color={skillBars[i].color}
-            />
-          ))}
+          <div className="flex flex-row flex-wrap gap-3">
+            {text.skills.map((skill, i) => (
+              <SkillCard key={i} name={skill.name} subname={skill.subname} iconUrl={coreIcons[i]} />
+            ))}
+          </div>
         </div>
 
         <div className="flex-1">
