@@ -100,7 +100,7 @@ const DevProcess = () => {
         <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
       </div>
-      <div className="mt-8 flex flex-col md:flex-row flex-wrap gap-6 items-stretch">
+      <div className="mt-8 pb-6 flex flex-col md:flex-row flex-wrap gap-6 items-stretch">
         {text.cards.map((card, i) => (
           <DevProcessCard
             key={i}
