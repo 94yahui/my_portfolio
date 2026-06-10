@@ -70,12 +70,12 @@ const t = {
 };
 
 const skillBars = [
-  { length: 90, color: "blue" },
   { length: 85, color: "blue" },
-  { length: 78, color: "green" },
-  { length: 72, color: "orange" },
-  { length: 68, color: "purple" },
-  { length: 60, color: "green" },
+  { length: 90, color: "blue" },
+  { length: 90, color: "green" },
+  { length: 90, color: "orange" },
+  { length: 85, color: "purple" },
+  { length: 90, color: "green" },
 ] as const;
 
 const toolIcons = [
