@@ -1,10 +1,4 @@
-import {
-  useState,
-  useRef,
-  useEffect,
-  useLayoutEffect,
-  useCallback,
-} from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import sunIcon from "./assets/sun.svg";
 import moonIcon from "./assets/moon.svg";
 
@@ -21,22 +15,29 @@ interface PillState {
   scaleY: number;
 }
 
+const buttons = {
+  en: ["Projects", "Experience", "About", "Contact"],
+  zh: ["项目", "经历", "关于", "联系"],
+};
+
+const sectionIds = buttons.en.map((name) => name.toLowerCase());
+
+// section 顶端越过视口这条线，才算"到了"这个 section
+const ANCHOR_RATIO = 0.35;
+
 const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  // -1 = 还没进入任何 section（页面最顶部），此时不显示背景
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [pill, setPill] = useState<PillState>({ left: 0, width: 0, scaleY: 1 });
+  const [pillVisible, setPillVisible] = useState(false);
 
   const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const animIdRef = useRef<number | null>(null);
   const fromRectRef = useRef<{ left: number; width: number } | null>(null);
-  const activeIndexRef = useRef(0);
+  const activeIndexRef = useRef(-1);
   // 标记是否正在程序化滚动（点击导航触发的滚动），期间忽略 scroll spy
   const isScrollingByClickRef = useRef(false);
   const clickScrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const buttons = {
-    en: ["Projects", "Experience", "About", "Contact"],
-    zh: ["项目", "经历", "关于", "联系"],
-  };
 
   const labels = buttons[lang];
 
@@ -132,73 +133,76 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
   const setActive = useCallback(
     (index: number) => {
       if (index === activeIndexRef.current) return;
-      const btn = btnRefs.current[index];
-      if (btn) animateTo(btn);
+      activeIndexRef.current = index;
       setActiveIndex(index);
+
+      // 回到"未进入任何 section"：淡出背景，并清空起点
+      if (index === -1) {
+        if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
+        fromRectRef.current = null;
+        setPillVisible(false);
+        return;
+      }
+
+      const btn = btnRefs.current[index];
+      if (!btn) return;
+
+      if (fromRectRef.current === null) {
+        // 从隐藏状态出现：直接定位后淡入，避免从左上角飞过来
+        if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
+        const r = getRect(btn);
+        setPill({ left: r.left, width: r.width, scaleY: 1 });
+        fromRectRef.current = r;
+        setPillVisible(true);
+      } else {
+        setPillVisible(true);
+        animateTo(btn);
+      }
     },
-    [animateTo],
+    [animateTo, getRect],
   );
 
-  useLayoutEffect(() => {
-    const btn = btnRefs.current[0];
-    if (!btn) return;
-    const r = getRect(btn);
-    setPill({ left: r.left, width: r.width, scaleY: 1 });
-    fromRectRef.current = r;
-  }, [getRect]);
-
+  // 🌟 Scroll Spy：取「最后一个越过判定线」的 section
   useEffect(() => {
-    activeIndexRef.current = activeIndex;
-  }, [activeIndex]);
+    let rafId: number | null = null;
 
-  // 🌟 Scroll Spy：监听各个 section 进入视口
-  useEffect(() => {
-    const sectionIds = buttons.en.map((name) => name.toLowerCase());
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+    const compute = () => {
+      rafId = null;
+      // 点击导航触发的滚动期间，不要让 scroll spy 干扰
+      if (isScrollingByClickRef.current) return;
 
-    if (sections.length === 0) return;
+      const anchorY = window.innerHeight * ANCHOR_RATIO;
 
-    // 记录每个 section 的可见比例
-    const visibilityMap = new Map<string, number>();
+      let idx = -1;
+      for (let i = 0; i < sectionIds.length; i++) {
+        const el = document.getElementById(sectionIds[i]);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= anchorY) idx = i;
+      }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // 点击导航触发的滚动期间，不要让 scroll spy 干扰
-        if (isScrollingByClickRef.current) return;
+      // 滚到底部时，最后一个 section 可能太短够不到判定线，强制激活
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) idx = sectionIds.length - 1;
 
-        entries.forEach((entry) => {
-          visibilityMap.set(entry.target.id, entry.intersectionRatio);
-        });
+      setActive(idx);
+    };
 
-        // 找出当前可见比例最高的 section
-        let maxRatio = 0;
-        let mostVisibleId: string | null = null;
-        visibilityMap.forEach((ratio, id) => {
-          if (ratio > maxRatio) {
-            maxRatio = ratio;
-            mostVisibleId = id;
-          }
-        });
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(compute);
+    };
 
-        if (mostVisibleId !== null && maxRatio > 0) {
-          const idx = sectionIds.indexOf(mostVisibleId);
-          if (idx !== -1) setActive(idx);
-        }
-      },
-      {
-        // 多个阈值 → 能精确比较哪个更"可见"
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-        // 顶部留出导航高度，让切换时机更自然
-        rootMargin: "-80px 0px -35% 0px",
-      },
-    );
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    compute();
 
-    sections.forEach((sec) => observer.observe(sec));
-
-    return () => observer.disconnect();
-    // 只依赖 setActive；section 列表是稳定的（页面结构不变）
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, [setActive]);
 
   // resize 重新对齐当前激活项
@@ -212,6 +216,7 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
       lastWidth = currentWidth;
 
       if (debounceTimer) clearTimeout(debounceTimer);
+      if (activeIndexRef.current === -1) return;
       setPill((prev) => ({ ...prev, width: 0 }));
 
       debounceTimer = setTimeout(() => {
@@ -233,7 +238,8 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
   // 语言切换后重新对齐
   useEffect(() => {
     const id = requestAnimationFrame(() => {
-      const btn = btnRefs.current[activeIndex];
+      if (activeIndexRef.current === -1) return;
+      const btn = btnRefs.current[activeIndexRef.current];
       if (!btn) return;
       const r = getRect(btn);
       setPill({ left: r.left, width: r.width, scaleY: 1 });
@@ -253,6 +259,8 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
               width: pill.width,
               transform: `scaleY(${pill.scaleY})`,
               transformOrigin: "center center",
+              opacity: pillVisible ? 1 : 0,
+              transition: "opacity 220ms ease",
             }}
           />
 
