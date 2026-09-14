@@ -1,6 +1,23 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Apple-toned blue scale — re-tints every blue-* utility site-wide.
+   Light shades stay light (for tag/section backgrounds); mid/dark
+   shades land on Apple's system blue (#0071e3 / #2997ff). */
+@theme {
+  --color-blue-50: #eef6ff;
+  --color-blue-100: #d9ecff;
+  --color-blue-200: #b3d8ff;
+  --color-blue-300: #80bdff;
+  --color-blue-400: #2997ff;
+  --color-blue-500: #0a84ff;
+  --color-blue-600: #0071e3;
+  --color-blue-700: #0059b3;
+  --color-blue-800: #004488;
+  --color-blue-900: #002e5c;
+  --color-blue-950: #001b38;
+}
+
 html {
   background-color: white;
 }

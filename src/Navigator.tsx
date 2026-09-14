@@ -43,7 +43,21 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id.toLowerCase());
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (!el) return;
+    // Sum layout offsets (transform-independent) instead of using
+    // scrollIntoView. A section that has scrolled up out of view is tucked by
+    // TuckSection (scale + rotateX), which distorts its bounding box; because
+    // scrollIntoView reads that transformed box, it would aim at the wrong
+    // spot and leave a growing gap under the nav. offsetTop ignores transforms.
+    let top = 0;
+    let node: HTMLElement | null = el;
+    while (node) {
+      top += node.offsetTop;
+      node = node.offsetParent as HTMLElement | null;
+    }
+    // Matches the sections' scroll-mt-30 (7.5rem) so the title clears the nav.
+    const NAV_OFFSET = 120;
+    window.scrollTo({ top: top - NAV_OFFSET, behavior: "smooth" });
   };
 
   const getRect = useCallback((btn: HTMLButtonElement) => {

@@ -4,6 +4,7 @@ import clario from "./assets/clario.svg";
 import skinu from "./assets/skinu.png";
 import guardian from "./assets/guardian.svg";
 import jianli from "./assets/logo-white.png";
+import jianliBlack from "./assets/logo-black.png";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
@@ -11,8 +12,8 @@ const t = {
     title: "Featured Projects",
     projects: [
       {
-        title: "JianliQuanKai",
-        descrp: "A live, AI-powered resume builder for the Chinese market. Features 150+ templates, DeepSeek-driven content optimization, WeChat auth, subscription billing, and one-click PDF export.",
+        title: "ResumeRight",
+        descrp: "A full-stack, AI-powered resume builder and ATS optimizer for global job seekers. Features 30+ recruiter-tested templates, real-time ATS scoring, O*NET-grounded RAG rewriting via DeepSeek, Stripe subscriptions, and one-click PDF export.",
       },
       {
         title: "Clario",
@@ -32,8 +33,8 @@ const t = {
     title: "精选项目",
     projects: [
       {
-        title: "简力全开",
-        descrp: "已上线运营的 AI 简历 SaaS 工具。集成 150+ 套模版、DeepSeek 内容优化、微信登录、订阅付费及一键 PDF 导出功能。",
+        title: "ResumeRight",
+        descrp: "面向全球求职者的全栈 AI 简历生成与 ATS 优化工具。集成 30+ 套经招聘官验证的模版、实时 ATS 评分、基于 O*NET 的 RAG 内容改写（DeepSeek）、Stripe 订阅付费及一键 PDF 导出功能。",
       },
       {
         title: "Clario",
@@ -53,10 +54,11 @@ const t = {
 
 const projects = [
   {
-    demoUrl: "https://www.jianliquankai.com/",
-    gitUrl: "https://github.com/94yahui/jianliquankai",
-    iconUrl: jianli, 
-    tools: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "DeepSeek AI", "Vercel"],
+    demoUrl: "https://resume-right.com/",
+    gitUrl: "https://github.com/94yahui",
+    iconUrl: jianliBlack,
+    iconUrlDark: jianli,
+    tools: ["Next.js", "TypeScript", "React", "DeepSeek", "Supabase", "Stripe"],
   },
   {
     demoUrl: "https://www.c-lario.com/",
@@ -87,7 +89,7 @@ const Projects = () => {
     <div
       ref={ref}
       className={`mt-30 scroll-mt-30 max-w-270 m-auto transition-all duration-700 ease-out
-        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
+        ${isVisible ? "opacity-100" : "opacity-0"}`}
       id="projects"
     >
       <h1 className="text-3xl text-center dark:text-gray-300">{text.title}</h1>
@@ -98,6 +100,7 @@ const Projects = () => {
               demoUrl={project.demoUrl}
               gitUrl={project.gitUrl}
               iconUrl={project.iconUrl}
+              iconUrlDark={project.iconUrlDark}
               title={text.projects[i].title}
               descrp={text.projects[i].descrp}
               tools={project.tools}

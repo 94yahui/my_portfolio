@@ -9,22 +9,21 @@ const devProcessColors = {
   blue: "bg-blue-500/30 text-blue-500",
   purple: "bg-purple-500/30 text-purple-500",
   green: "bg-green-500/30 text-green-500",
-  orange: "bg-orange-500/30text-orange-500",
-}
+  orange: "bg-orange-500/30 text-orange-500",
+};
 
 const bgDevProcessColors = {
   blue: "bg-linear-to-br from-blue-500 to-purple-500",
   purple: "bg-linear-to-br from-purple-500 to-pink-500",
   green: "bg-linear-to-br from-green-500 to-blue-500",
   orange: "bg-linear-to-br from-orange-500 to-yellow-500",
-}
+};
 
 const glowDevProcessColors = {
   blue: "hover:shadow-[0_0_35px_8px_rgba(59,130,246,0.45)] focus:shadow-[0_0_35px_8px_rgba(59,130,246,0.45)] active:shadow-[0_0_35px_8px_rgba(59,130,246,0.45)]",
   purple: "hover:shadow-[0_0_35px_8px_rgba(168,85,247,0.45)] focus:shadow-[0_0_35px_8px_rgba(168,85,247,0.45)] active:shadow-[0_0_35px_8px_rgba(168,85,247,0.45)]",
   green: "hover:shadow-[0_0_35px_8px_rgba(34,197,94,0.45)] focus:shadow-[0_0_35px_8px_rgba(34,197,94,0.45)] active:shadow-[0_0_35px_8px_rgba(34,197,94,0.45)]",
   orange: "hover:shadow-[0_0_35px_8px_rgba(249,115,22,0.45)] focus:shadow-[0_0_35px_8px_rgba(249,115,22,0.45)] active:shadow-[0_0_35px_8px_rgba(249,115,22,0.45)]",
-}
-
+};
 
 export {progressColors, devProcessColors, bgDevProcessColors, glowDevProcessColors};

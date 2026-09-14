@@ -8,6 +8,7 @@ import DevProcess from "./DevProcess";
 import Contact from "./Contact";
 import About from "./About";
 import Experience from "./Experience";
+import TuckSection from "./components/TuckSection";
 // import RealLiquidNav from './components/LiquidGlassNav'
 import { LangContext } from "./context/LangContext";
 import "./index.css";
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <LangContext.Provider value={lang}>
-      <div className="mb-6 bg-white dark:bg-gray-900 min-h-screen">
+      <div className="mb-6 bg-white dark:bg-gray-900 min-h-screen overflow-x-clip">
         <Navigator
           dark={dark}
           toggle={toggle}
@@ -29,12 +30,12 @@ function App() {
         {/* <RealLiquidNav/> */}
         <div className="mt-25 p-2 flex flex-col gap-3">
           <Intro />
-          <Projects />
-          <Techinical />
-          <Experience />
-          <DevProcess />
-          <About />
-          <Contact />
+          <TuckSection><Projects /></TuckSection>
+          <TuckSection><Techinical /></TuckSection>
+          <TuckSection><Experience /></TuckSection>
+          <TuckSection><DevProcess /></TuckSection>
+          <TuckSection><About /></TuckSection>
+          <TuckSection><Contact /></TuckSection>
           <footer className="text-center py-6 text-gray-400 dark:text-gray-600 text-sm">
             © 2026 Yahui Xu. All rights reserved.
           </footer>

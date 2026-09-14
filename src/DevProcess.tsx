@@ -93,7 +93,7 @@ const DevProcess = () => {
       ref={ref}
       className={`mt-30 max-w-270 m-auto transition-all duration-700 ease-out
         ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+          isVisible ? "opacity-100" : "opacity-0"
         }`}
     >
       <div className="text-center">

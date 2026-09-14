@@ -99,7 +99,7 @@ const Techinical = () => {
   return (
     <div ref={ref} className={`mt-30 max-w-270 m-auto transition-all duration-700 ease-out
         ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+          isVisible ? "opacity-100" : "opacity-0"
         }`}>
       <div className="text-center">
         <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
@@ -126,7 +126,7 @@ const Techinical = () => {
 
         <div className="flex-1">
           <div className="flex gap-2 items-center mb-4">
-            <Layers className="w-5 h-5 text-purple-500" />
+            <Layers className="w-5 h-5 text-blue-500" />
             <h2 className="font-semibold text-2xl dark:text-gray-400">{text.toolsTitle}</h2>
           </div>
           <div className="flex flex-row flex-wrap gap-3">
