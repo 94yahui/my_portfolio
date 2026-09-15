@@ -45,10 +45,8 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
     const el = document.getElementById(id.toLowerCase());
     if (!el) return;
     // Sum layout offsets (transform-independent) instead of using
-    // scrollIntoView. A section that has scrolled up out of view is tucked by
-    // TuckSection (scale + rotateX), which distorts its bounding box; because
-    // scrollIntoView reads that transformed box, it would aim at the wrong
-    // spot and leave a growing gap under the nav. offsetTop ignores transforms.
+    // scrollIntoView, so any CSS transform on the section or its ancestors
+    // can't distort the target position. Robust and cheap.
     let top = 0;
     let node: HTMLElement | null = el;
     while (node) {

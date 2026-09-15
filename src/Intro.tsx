@@ -70,6 +70,16 @@ const Intro = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Respect users who prefer reduced motion: skip the scroll-driven tuck
+    // entirely and leave the hero at its resting state (progress = 0).
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) {
+      setProgress(0);
+      return;
+    }
+
     let raf = 0;
     const update = () => {
       raf = 0;
