@@ -97,7 +97,7 @@ const Techinical = () => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <div ref={ref} className={`mt-30 max-w-270 m-auto px-3 sm:px-0 transition-all duration-700 ease-out
+    <div ref={ref} className={`mt-30 max-w-270 m-auto transition-all duration-700 ease-out
         ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}>
@@ -106,7 +106,7 @@ const Techinical = () => {
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
       </div>
 
-      <div className="mt-8 flex flex-col sm:flex-row gap-10 border border-blue-500/20 rounded-2xl p-6 shadow-lg sm:shadow-2xl">
+      <div className="mt-8 flex flex-col sm:flex-row gap-10 border border-blue-500/20 rounded-2xl p-6 shadow-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
 
         <div className="flex-1">
           <div className="flex gap-2 items-center mb-4">
