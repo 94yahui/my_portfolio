@@ -4,7 +4,7 @@ import { devProcessColors, bgDevProcessColors, glowDevProcessColors } from "../s
 interface DevProcessProps {
     title:string
     steps:string[]
-    color: "blue" | "purple" | "green" | "orange";
+    color: keyof typeof bgDevProcessColors;
     children:React.ReactNode
 }
 

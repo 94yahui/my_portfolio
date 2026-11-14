@@ -135,7 +135,7 @@ const Experience = () => {
         }`}
     >
       <div className="text-center">
-        <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
+        <h1 className="text-3xl dark:text-white">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
       </div>
 

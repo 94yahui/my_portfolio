@@ -8,6 +8,7 @@ import DevProcess from "./DevProcess";
 import Contact from "./Contact";
 import About from "./About";
 import Experience from "./Experience";
+import SideContactRail from "./components/SideContactRail";
 // import RealLiquidNav from './components/LiquidGlassNav'
 import { LangContext } from "./context/LangContext";
 import "./index.css";
@@ -26,6 +27,7 @@ function App() {
           lang={lang}
           toggleLang={toggleLang}
         />
+        <SideContactRail />
         {/* <RealLiquidNav/> */}
         <div className="mt-25 p-2 flex flex-col gap-3">
           <Intro />

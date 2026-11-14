@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import sunIcon from "./assets/sun.svg";
 import moonIcon from "./assets/moon.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileLines } from "@fortawesome/free-solid-svg-icons";
 
 interface NavigatorProps {
   dark: boolean;
@@ -19,6 +21,8 @@ const buttons = {
   en: ["Projects", "Experience", "About", "Contact"],
   zh: ["项目", "经历", "关于", "联系"],
 };
+
+const resumeLabel = { en: "Resume", zh: "简历" };
 
 const sectionIds = buttons.en.map((name) => name.toLowerCase());
 
@@ -262,8 +266,8 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
 
   return (
     <div className="flex justify-center w-full px-4">
-      <div className="fixed top-6 z-100 bg-gray-700/80 backdrop-blur-md rounded-full p-1.5 md:p-2 shadow-2xl border-blue-500/50 border max-w-[95vw]">
-        <div className="relative flex gap-0.5 md:gap-2 items-center">
+      <div className="fixed top-6 z-100 bg-[#0b1220]/70 backdrop-blur-md rounded-full p-1.5 md:p-2 shadow-2xl border-white/10 border max-w-[95vw]">
+        <div className="relative flex gap-0 md:gap-2 items-center">
           <div
             className="absolute top-0 bottom-0 rounded-full pointer-events-none z-0 bg-blue-500 shadow-lg"
             style={{
@@ -294,7 +298,7 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
                 setActive(index);
                 scrollTo(buttons.en[index]);
               }}
-              className={`relative z-10 text-[12px] md:text-sm py-2 px-2.5 md:px-4 rounded-2xl cursor-pointer transition-all duration-300 shrink-0 ${
+              className={`relative z-10 text-[12px] max-[380px]:text-[11px] md:text-sm py-2 px-2 max-[380px]:px-1.5 md:px-4 rounded-2xl cursor-pointer transition-all duration-300 shrink-0 ${
                 activeIndex === index
                   ? "text-white scale-105 md:scale-110"
                   : "text-gray-300 hover:text-white"
@@ -306,10 +310,22 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
 
           <div className="w-px h-4 dark:bg-gray-500/50 bg-gray-400/50 mx-1 shrink-0" />
 
+          <a
+            href={lang === "en" ? "/yahui_resume.pdf" : "/许亚辉简历.pdf"}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={resumeLabel[lang]}
+            title={resumeLabel[lang]}
+            className="relative z-10 flex items-center gap-1.5 text-[12px] md:text-sm p-1.5 md:py-1.5 md:px-3.5 rounded-full border border-blue-400/60 text-blue-200 hover:text-white hover:bg-blue-500/30 transition-all duration-300 shrink-0"
+          >
+            <FontAwesomeIcon icon={faFileLines} className="w-3.5 h-3.5 md:w-3 md:h-3" />
+            <span className="hidden md:inline">{resumeLabel[lang]}</span>
+          </a>
+
           <div className="flex items-center">
             <button
               onClick={toggle}
-              className="relative z-10 p-2 rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600 shrink-0"
+              className="relative z-10 p-2 rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/10 shrink-0"
             >
               <img
                 src={dark ? sunIcon : moonIcon}
@@ -320,7 +336,7 @@ const Navigator = ({ dark, toggle, lang, toggleLang }: NavigatorProps) => {
 
             <button
               onClick={toggleLang}
-              className="relative z-10 text-[12px] md:text-[14px] w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-gray-600 font-bold shrink-0"
+              className="relative z-10 text-[12px] md:text-[14px] w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/10 font-bold shrink-0"
             >
               {lang === "en" ? "中" : "EN"}
             </button>

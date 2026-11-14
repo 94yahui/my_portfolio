@@ -26,6 +26,35 @@ html.dark {
   background-color: #111827;
 }
 
+/* Hero 极光：模糊光斑缓慢漂移 */
+.aurora-blob {
+  filter: blur(80px);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+.aurora-blob--2 {
+  animation-duration: 22s;
+  animation-delay: -6s;
+}
+@keyframes aurora-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(60px, 40px) scale(1.15);
+  }
+  100% {
+    transform: translate(-40px, 20px) scale(0.95);
+  }
+}
+
+/* Hero 点阵网格：中间清晰、边缘淡出 */
+.hero-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 60% at 35% 45%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 35% 45%, #000 30%, transparent 80%);
+}
+
 /* Respect users who prefer reduced motion: neutralize animations,
    transitions (scroll-reveal fade-ups, hovers) and smooth scrolling. */
 @media (prefers-reduced-motion: reduce) {

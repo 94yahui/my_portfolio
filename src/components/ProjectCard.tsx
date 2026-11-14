@@ -21,7 +21,7 @@ const ProjectCard = ({
   tools,
 }: ProjectCardProps) => {
   return (
-    <div className="p-6 rounded-xl bg-[#f5f5f7] dark:bg-[#0f2340] border border-black/5 dark:border-white/10 flex gap-6 h-full">
+    <div className="p-6 rounded-xl bg-[#f5f5f7] dark:bg-gray-800/50 border border-black/5 dark:border-blue-500/20 flex gap-6 h-full">
       {iconUrlDark ? (
         <>
           <img src={iconUrl} className="w-20 h-20 drop-shadow-xl block dark:hidden" />
@@ -52,12 +52,12 @@ const ProjectCard = ({
           </a>
           </div>
         </div>
-        <p className="py-3 text-[#6e6e73] dark:text-[#a1a1a6]">{descrp}</p>
+        <p className="py-3 text-slate-500 dark:text-slate-400">{descrp}</p>
         <div className="flex flex-wrap gap-2">
           {tools.map((tool, index) => (
             <div
               key={index}
-              className="py-.8 px-2 border border-black/10 dark:border-[#22436e] text-[#6e6e73] dark:text-[#a1a1a6] rounded-4xl text-[14px]"
+              className="py-.8 px-2 border border-black/10 dark:border-gray-600 text-slate-500 dark:text-slate-400 rounded-4xl text-[14px]"
             >
               {tool}
             </div>
