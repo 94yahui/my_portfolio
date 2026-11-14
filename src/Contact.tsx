@@ -25,23 +25,46 @@ const Contact = () => {
     <div
       id="contact"
       ref={ref}
-      className={`max-w-270 m-auto relative w-full mt-30 bg-linear-to-br from-blue-100 to-blue-50 dark:from-blue-950 dark:to-gray-900 border-dashed border border-blue-500 dark:border-blue-700 p-20 rounded-2xl group scroll-mt-30 transition-all duration-700 ease-out
+      // 和 hero 首尾呼应：同款深靛蓝底 + 静态的苹果蓝 / 靛蓝光晕（不加漂移动画）
+      style={{
+        background: [
+          "radial-gradient(ellipse 50% 70% at 15% 0%, rgba(79,70,229,0.28), transparent 70%)",
+          "radial-gradient(ellipse 50% 70% at 85% 100%, rgba(10,132,255,0.22), transparent 70%)",
+          "linear-gradient(to bottom, #121a3d, #0b0f26 55%, #070812)",
+        ].join(", "),
+      }}
+      className={`max-w-270 m-auto relative w-full mt-30 p-20 rounded-2xl group scroll-mt-30 transition-all duration-700 ease-out
         ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
     >
-      <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000 dark:text-blue-400" />
-      <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000 dark:text-blue-400" />
+      <Send className="w-30 h-30 absolute left-0 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 group-hover:left-15 transition-all duration-1000 text-blue-400" />
+      <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000 text-blue-400" />
 
       <div className="text-center">
-        <h1 className="text-3xl dark:text-gray-100">{text.title}</h1>
-        <p className="mt-5 max-w-150 m-auto text-gray-700 dark:text-gray-400">
+        <h1 className="text-3xl text-white">{text.title}</h1>
+        <p className="mt-5 max-w-150 m-auto text-slate-400">
           {text.subtitle}
         </p>
       </div>
       <div className="mt-15">
-        <ContactIcon />
+        <ContactIcon disableDarkMode />
       </div>
+
+      {/* 和 hero 同款渐变边框：顶部靛蓝高光，向下淡出 */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        style={{
+          padding: "1.5px",
+          background:
+            "linear-gradient(to bottom, rgba(129,140,248,0.6), rgba(255,255,255,0.05))",
+          WebkitMask:
+            "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+        }}
+      />
     </div>
   );
 };

@@ -173,20 +173,29 @@ const Intro = () => {
         filter: `blur(${progress * 16}px)`,
         opacity: 1 - progress * 0.75,
         willChange: "transform, filter, opacity",
+        // 夜空底色：偏蓝的深靛蓝 → 近黑，和全站苹果蓝主色同一色系
+        background: "linear-gradient(to bottom, #121a3d, #0b0f26 55%, #070812)",
       }}
-      className="relative m-auto max-w-270 rounded-2xl bg-linear-to-b from-[#0f2a4a] via-[#0b1c33] to-[#06101d] w-full flex items-center"
+      className="relative m-auto max-w-270 rounded-2xl w-full flex items-center"
     >
-      <div>
+      {/* 极光层：靛蓝 + 苹果蓝两团模糊光斑缓慢漂移 + 点阵网格，整体裁在圆角内 */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+        <div className="aurora-blob absolute -top-24 -left-16 w-[28rem] h-[28rem] rounded-full bg-indigo-600/40" />
+        <div className="aurora-blob aurora-blob--2 absolute top-10 right-0 w-[26rem] h-[26rem] rounded-full bg-blue-500/30" />
+        <div className="hero-grid absolute inset-0" />
+      </div>
+
+      <div className="relative z-10">
         <div className="p-8 text-center">
-          <p className="text-[#86868b] sm:text-2xl">{text.hi}</p>
+          <p className="text-slate-400 sm:text-2xl">{text.hi}</p>
           <h1 className="p-2 sm:text-8xl text-5xl font-semibold text-white tracking-tight">
             {text.name}
           </h1>
-          <h2 className="p-2 sm:text-4xl text-2xl font-semibold text-[#86868b] tracking-tight">
+          <h2 className="p-2 sm:text-4xl text-2xl font-semibold text-slate-300 tracking-tight">
             {text.title}
           </h2>
 
-          <p className="p-2 text-[#a1a1a6]">{text.description}</p>
+          <p className="p-2 text-slate-400">{text.description}</p>
 
           <div className="mt-4">
             <a
@@ -273,7 +282,7 @@ const Intro = () => {
         />
       </div>
 
-      {/* Gradient border ring: bright blue highlight on top, fading down (like
+      {/* Gradient border ring: soft indigo highlight on top, fading down (like
           the About avatar circle) instead of a flat single-color border. */}
       <div
         aria-hidden
@@ -281,7 +290,7 @@ const Intro = () => {
         style={{
           padding: "1.5px",
           background:
-            "linear-gradient(to bottom, rgba(41,151,255,0.6), rgba(255,255,255,0.05))",
+            "linear-gradient(to bottom, rgba(129,140,248,0.6), rgba(255,255,255,0.05))",
           WebkitMask:
             "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
           WebkitMaskComposite: "xor",

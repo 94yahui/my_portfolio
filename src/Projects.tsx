@@ -92,7 +92,7 @@ const Projects = () => {
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
       id="projects"
     >
-      <h1 className="text-3xl text-center dark:text-gray-300">{text.title}</h1>
+      <h1 className="text-3xl text-center dark:text-white">{text.title}</h1>
       <div className="flex flex-wrap gap-6 mt-8">
         {projects.map((project, i) => (
           <div key={i} className="w-full sm:w-[calc(50%-12px)]">

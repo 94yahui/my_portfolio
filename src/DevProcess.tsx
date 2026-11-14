@@ -63,7 +63,8 @@ const t = {
   },
 };
 
-const cardColors = ["blue", "purple", "green"] as const;
+// 「城堡夜空」：黄昏许愿星 → 魔法紫夜 → 城堡烟花
+const cardColors = ["dusk", "night", "fireworks"] as const;
 
 const cardIcons = [
   (color: string) => (
@@ -97,7 +98,7 @@ const DevProcess = () => {
         }`}
     >
       <div className="text-center">
-        <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
+        <h1 className="text-3xl dark:text-white">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
       </div>
       <div className="mt-8 pb-6 flex flex-col md:flex-row flex-wrap gap-6 items-stretch">

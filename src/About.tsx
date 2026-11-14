@@ -8,23 +8,23 @@ const t = {
     paragraph: (
       <>
         I am a{" "}
-        <span className="font-extrabold text-black dark:text-gray-300">
+        <span className="font-extrabold text-black dark:text-white">
           Full-stack Developer
         </span>{" "}
         who bridges the gap between sophisticated design and high-performance
         code. Currently completing the{" "}
-        <span className="italic font-bold text-black dark:text-gray-300">
+        <span className="italic font-bold text-black dark:text-white">
           Web and Mobile App Development
         </span>{" "}
         program at{" "}
-        <span className="font-bold text-[#f05a22]">Langara College</span>, I
+        <span className="font-bold text-black dark:text-white">Langara College</span>, I
         specialize in building intuitive,{" "}
-        <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f05a22] to-[#a855f7] hover:opacity-80 transition-opacity cursor-default">
+        <span className="font-bold text-black dark:text-white">
           AI-enhanced applications
         </span>{" "}
-        using <span className="text-blue-600 font-medium">React</span>,{" "}
-        <span className="text-blue-600 font-medium">Swift</span>, and{" "}
-        <span className="text-blue-600 font-medium">Node.js</span>. My mission
+        using <span className="text-blue-600 dark:text-blue-400 font-medium">React</span>,{" "}
+        <span className="text-blue-600 dark:text-blue-400 font-medium">Swift</span>, and{" "}
+        <span className="text-blue-600 dark:text-blue-400 font-medium">Node.js</span>. My mission
         is simple: transforming complex user needs into seamless digital
         realities through clean architecture and thoughtful UX.
       </>
@@ -35,18 +35,18 @@ const t = {
     paragraph: (
       <>
         我是一名{" "}
-        <span className="font-extrabold text-black dark:text-gray-300">
+        <span className="font-extrabold text-black dark:text-white">
           全栈开发者
         </span>
         ，专注于在精美设计与高性能代码之间架起桥梁。目前就读于{" "}
-        <span className="font-bold text-[#f05a22]">兰加拉学院</span>的{" "}
-        <span className="italic font-bold text-black dark:text-gray-300">
+        <span className="font-bold text-black dark:text-white">兰加拉学院</span>的{" "}
+        <span className="italic font-bold text-black dark:text-white">
           Web 与移动端应用开发
         </span>{" "}
-        专业，擅长使用 <span className="text-blue-600 font-medium">React</span>
-        、 <span className="text-blue-600 font-medium">Swift</span> 和{" "}
-        <span className="text-blue-600 font-medium">Node.js</span> 构建直观的{" "}
-        <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f05a22] to-[#a855f7] hover:opacity-80 transition-opacity cursor-default">
+        专业，擅长使用 <span className="text-blue-600 dark:text-blue-400 font-medium">React</span>
+        、 <span className="text-blue-600 dark:text-blue-400 font-medium">Swift</span> 和{" "}
+        <span className="text-blue-600 dark:text-blue-400 font-medium">Node.js</span> 构建直观的{" "}
+        <span className="font-bold text-black dark:text-white">
           AI 增强型应用
         </span>
         。我的使命很简单：通过清晰的架构与用心的用户体验设计，将复杂的用户需求转化为流畅的数字产品。
@@ -70,7 +70,7 @@ const About = () => {
         }`}
     >
       <div className="text-center">
-        <h1 className="text-3xl dark:text-gray-300">{text.title}</h1>
+        <h1 className="text-3xl dark:text-white">{text.title}</h1>
         <div className="mt-5 flex flex-col items-center">
           {/* 渐变圆容器 */}
           <div className="relative w-50 h-50 flex items-end justify-center">
