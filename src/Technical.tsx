@@ -1,4 +1,3 @@
-import ProgressBar from "./components/ProgressBar";
 import SkillCard from "./components/SkillCard";
 import { useLang } from "./context/LangContext";
 import { Layers, Box } from "lucide-react";
@@ -12,6 +11,11 @@ import linuxIcon from "./assets/linux.svg";
 import claudeIcon from "./assets/claude.svg";
 import dockerIcon from "./assets/docker.svg";
 import kubernetesIcon from "./assets/kubernetes.svg";
+import nextIcon from "./assets/nextjs.svg";
+import tsIcon from "./assets/ts.png";
+import nodeIcon from "./assets/nodejs.svg";
+import swiftIcon from "./assets/swift.png";
+import goIcon from "./assets/golang.svg";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 
 const t = {
@@ -69,14 +73,7 @@ const t = {
   },
 };
 
-const skillBars = [
-  { length: 85, color: "blue" },
-  { length: 90, color: "blue" },
-  { length: 90, color: "green" },
-  { length: 90, color: "orange" },
-  { length: 85, color: "purple" },
-  { length: 90, color: "green" },
-] as const;
+const skillIcons = [nextIcon, reactIcon, tsIcon, nodeIcon, swiftIcon, goIcon];
 
 const toolIcons = [
   dockerIcon,
@@ -102,7 +99,7 @@ const Techinical = () => {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}>
       <div className="text-center">
-        <h1 className="text-3xl dark:text-white">{text.title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight dark:text-white">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
       </div>
 
@@ -111,23 +108,24 @@ const Techinical = () => {
         <div className="flex-1">
           <div className="flex gap-2 items-center mb-4">
             <Box className="w-5.5 h-5.5 text-blue-500" />
-            <h2 className="font-semibold text-2xl dark:text-gray-400">{text.coreTitle}</h2>
+            <h2 className="font-semibold text-2xl text-gray-800 dark:text-gray-100">{text.coreTitle}</h2>
           </div>
-          {text.skills.map((skill, i) => (
-            <ProgressBar
-              key={i}
-              name={skill.name}
-              subname={skill.subname}
-              length={skillBars[i].length}
-              color={skillBars[i].color}
-            />
-          ))}
+          <div className="grid grid-cols-2 gap-3">
+            {text.skills.map((skill, i) => (
+              <SkillCard
+                key={i}
+                name={skill.name}
+                subname={skill.subname}
+                iconUrl={skillIcons[i]}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="flex-1">
           <div className="flex gap-2 items-center mb-4">
             <Layers className="w-5 h-5 text-blue-500" />
-            <h2 className="font-semibold text-2xl dark:text-gray-400">{text.toolsTitle}</h2>
+            <h2 className="font-semibold text-2xl text-gray-800 dark:text-gray-100">{text.toolsTitle}</h2>
           </div>
           <div className="flex flex-row flex-wrap gap-3">
             {text.tools.map((name, i) => (

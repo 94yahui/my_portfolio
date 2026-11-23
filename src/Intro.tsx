@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import { useLang } from "./context/LangContext";
 import cartoonSpring from "./assets/cartoon-spring.png";
@@ -64,58 +64,6 @@ const Intro = () => {
   const text = t[lang];
   const [weatherImg, setWeatherImg] = useState(cartoonSpring);
 
-  // Scroll-driven "tuck away" effect: as the hero scrolls out, it tilts back
-  // at the top (narrows), shrinks, blurs and fades — like it's receding.
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    // Respect users who prefer reduced motion: skip the scroll-driven tuck
-    // entirely and leave the hero at its resting state (progress = 0).
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduceMotion) {
-      setProgress(0);
-      return;
-    }
-
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const el = heroRef.current;
-      if (!el) return;
-      // Use layout offsets (transform-independent) to avoid a feedback loop:
-      // the hero's own transform would otherwise distort getBoundingClientRect.
-      let top = 0;
-      let node: HTMLElement | null = el;
-      while (node) {
-        top += node.offsetTop;
-        node = node.offsetParent as HTMLElement | null;
-      }
-      const height = el.offsetHeight || window.innerHeight;
-      // Anchor to the section's BOTTOM edge: stay at 0 until the section is
-      // actually leaving, then ramp 0→1 over the last `ramp` px before its
-      // bottom exits the top of the viewport.
-      const vh = window.innerHeight;
-      const ramp = Math.min(vh * 0.6, height);
-      const p = Math.min(
-        Math.max((window.scrollY - (top + height - ramp)) / ramp, 0),
-        1,
-      );
-      setProgress(p);
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
   useEffect(() => {
     const fetchWeather = async () => {
       const currentMonth = new Date().getMonth() + 1;
@@ -166,13 +114,7 @@ const Intro = () => {
 
   return (
     <div
-      ref={heroRef}
       style={{
-        transform: `perspective(1000px) rotateX(${progress * 30}deg) scale(${1 - progress * 0.18})`,
-        transformOrigin: "top center",
-        filter: `blur(${progress * 16}px)`,
-        opacity: 1 - progress * 0.75,
-        willChange: "transform, filter, opacity",
         // 夜空底色：偏蓝的深靛蓝 → 近黑，和全站苹果蓝主色同一色系
         background: "linear-gradient(to bottom, #121a3d, #0b0f26 55%, #070812)",
       }}

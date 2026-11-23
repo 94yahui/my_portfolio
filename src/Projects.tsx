@@ -64,7 +64,7 @@ const projects = [
     demoUrl: "https://www.c-lario.com/",
     gitUrl: "https://github.com/94yahui/clario",
     iconUrl: clario,
-    tools: ["Node JS", "TypeScript", "Tailwind", "Firebase", "MangoDB", "Redux", "Axios", "Vercel"],
+    tools: ["Node JS", "TypeScript", "Tailwind", "Firebase", "MongoDB", "Redux", "Axios", "Vercel"],
   },
   {
     demoUrl: "https://guardian-mu-three.vercel.app/",
@@ -92,7 +92,7 @@ const Projects = () => {
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
       id="projects"
     >
-      <h1 className="text-3xl text-center dark:text-white">{text.title}</h1>
+      <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-center dark:text-white">{text.title}</h1>
       <div className="flex flex-wrap gap-6 mt-8">
         {projects.map((project, i) => (
           <div key={i} className="w-full sm:w-[calc(50%-12px)]">

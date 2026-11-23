@@ -9,7 +9,7 @@ const t = {
     sectionTitle: "Work Experience",
     experiences: [
       {
-        date: "Jan 2026 – Present",
+        date: "Jan 2026 – Apr 2026",
         jobTitle: "Web Developer & Maintainer",
         company: "Langara College — Fine Arts Department",
         link: "https://langarafinagradshow.com",
@@ -60,7 +60,7 @@ const t = {
     sectionTitle: "工作经历",
     experiences: [
       {
-        date: "2026年1月 – 现在",
+        date: "2026年1月 – 2026年4月",
         jobTitle: "Web 开发与维护",
         company: "兰加拉学院 — 美术系",
         link: "https://langarafinagradshow.com",
@@ -135,7 +135,7 @@ const Experience = () => {
         }`}
     >
       <div className="text-center">
-        <h1 className="text-3xl dark:text-white">{text.title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight dark:text-white">{text.title}</h1>
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
       </div>
 
