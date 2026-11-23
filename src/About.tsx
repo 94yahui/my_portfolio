@@ -70,7 +70,7 @@ const About = () => {
         }`}
     >
       <div className="text-center">
-        <h1 className="text-3xl dark:text-white">{text.title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight dark:text-white">{text.title}</h1>
         <div className="mt-5 flex flex-col items-center">
           {/* 渐变圆容器 */}
           <div className="relative w-50 h-50 flex items-end justify-center">

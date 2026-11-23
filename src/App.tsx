@@ -4,7 +4,6 @@ import Navigator from "./Navigator";
 import Intro from "./Intro";
 import Techinical from "./Technical";
 import Projects from "./Projects";
-import DevProcess from "./DevProcess";
 import Contact from "./Contact";
 import About from "./About";
 import Experience from "./Experience";
@@ -34,7 +33,6 @@ function App() {
           <Projects />
           <Techinical />
           <Experience />
-          <DevProcess />
           <About />
           <Contact />
           <footer className="text-center py-6 text-gray-400 dark:text-gray-600 text-sm">

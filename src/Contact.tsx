@@ -42,7 +42,7 @@ const Contact = () => {
       <Mail className="w-30 h-30 absolute right-7 bottom-0 rotate-20 opacity-0 group-hover:opacity-5 group-hover:bottom-7 transition-all duration-1000 text-blue-400" />
 
       <div className="text-center">
-        <h1 className="text-3xl text-white">{text.title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">{text.title}</h1>
         <p className="mt-5 max-w-150 m-auto text-slate-400">
           {text.subtitle}
         </p>
