@@ -19,7 +19,7 @@ function App() {
 
   return (
     <LangContext.Provider value={lang}>
-      <div className="mb-6 bg-white dark:bg-gray-900 min-h-screen overflow-x-clip">
+      <div className="relative mb-6 bg-white dark:bg-gray-900 min-h-screen overflow-x-clip">
         <Navigator
           dark={dark}
           toggle={toggle}
@@ -27,8 +27,8 @@ function App() {
           toggleLang={toggleLang}
         />
         <SideContactRail />
-        {/* 整页点阵背景，固定在视口上，内容滚过它 */}
-        <div aria-hidden className="page-grid pointer-events-none fixed inset-0 z-0" />
+        {/* 整页点阵背景：铺满整页、跟内容一起滚动（不用 fixed，避免手机上滚动时反复重绘） */}
+        <div aria-hidden className="page-grid pointer-events-none absolute inset-0 z-0" />
         {/* <RealLiquidNav/> */}
         <div className="relative mt-25 p-2 flex flex-col gap-3">
           <Intro />

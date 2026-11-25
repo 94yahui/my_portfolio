@@ -139,7 +139,7 @@ const Experience = () => {
         <p className="mt-3 text-gray-400">{text.subtitle}</p>
       </div>
 
-      <div className="mt-8 border border-blue-500/20 rounded-2xl p-6 shadow-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+      <div className="mt-8 border border-blue-500/20 rounded-2xl p-6 shadow-2xl bg-white/80 dark:bg-gray-800/80">
         <div className="flex gap-2 items-center mb-8">
           <Briefcase className="w-6 h-6 text-blue-500" />
           <h2 className="font-semibold text-2xl text-gray-800 dark:text-gray-100">

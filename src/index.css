@@ -47,12 +47,13 @@ html.dark {
   }
 }
 
-/* 整页点阵背景：22px 点阵，很淡，向屏幕边缘淡出 */
+/* 整页点阵背景：22px 点阵，很淡，向左右两侧淡出 */
 .page-grid {
   background-image: radial-gradient(rgba(15, 23, 42, 0.1) 1px, transparent 1px);
   background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 45%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 45%, transparent 100%);
+  /* 只在左右两侧淡出：整页很高，用径向遮罩会让上下大段消失 */
+  mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
 }
 .dark .page-grid {
   background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
