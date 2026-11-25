@@ -47,12 +47,15 @@ html.dark {
   }
 }
 
-/* Hero 点阵网格：中间清晰、边缘淡出 */
-.hero-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+/* 整页点阵背景：22px 点阵，很淡，向屏幕边缘淡出 */
+.page-grid {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.1) 1px, transparent 1px);
   background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse 70% 60% at 35% 45%, #000 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 35% 45%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 45%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 45%, transparent 100%);
+}
+.dark .page-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
 }
 
 /* Respect users who prefer reduced motion: neutralize animations,
