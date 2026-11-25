@@ -27,8 +27,10 @@ function App() {
           toggleLang={toggleLang}
         />
         <SideContactRail />
+        {/* 整页点阵背景，固定在视口上，内容滚过它 */}
+        <div aria-hidden className="page-grid pointer-events-none fixed inset-0 z-0" />
         {/* <RealLiquidNav/> */}
-        <div className="mt-25 p-2 flex flex-col gap-3">
+        <div className="relative mt-25 p-2 flex flex-col gap-3">
           <Intro />
           <Projects />
           <Techinical />

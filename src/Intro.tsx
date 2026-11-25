@@ -120,11 +120,10 @@ const Intro = () => {
       }}
       className="relative m-auto max-w-270 rounded-2xl w-full flex items-center"
     >
-      {/* 极光层：靛蓝 + 苹果蓝两团模糊光斑缓慢漂移 + 点阵网格，整体裁在圆角内 */}
+      {/* 极光层：靛蓝 + 苹果蓝两团模糊光斑缓慢漂移，整体裁在圆角内 */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
         <div className="aurora-blob absolute -top-24 -left-16 w-[28rem] h-[28rem] rounded-full bg-indigo-600/40" />
         <div className="aurora-blob aurora-blob--2 absolute top-10 right-0 w-[26rem] h-[26rem] rounded-full bg-blue-500/30" />
-        <div className="hero-grid absolute inset-0" />
       </div>
 
       <div className="relative z-10">
@@ -223,22 +222,6 @@ const Intro = () => {
           className="z-65 hidden sm:block w-20 absolute top-45 right-25 -rotate-20 blur-[2px]"
         />
       </div>
-
-      {/* Gradient border ring: soft indigo highlight on top, fading down (like
-          the About avatar circle) instead of a flat single-color border. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-50 rounded-2xl"
-        style={{
-          padding: "1.5px",
-          background:
-            "linear-gradient(to bottom, rgba(129,140,248,0.6), rgba(255,255,255,0.05))",
-          WebkitMask:
-            "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-        }}
-      />
     </div>
   );
 };
